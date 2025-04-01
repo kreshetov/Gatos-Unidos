@@ -14,3 +14,4 @@
 3. Aplicar estilos (colores, fuentes) con CSS.
 4. Subir el proyecto a GitHub.
 5. Crear GitHub Pages.
+# Fase 1 Terminada (v1.0.0)
