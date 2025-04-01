@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/gatos-unidos/static/css/main.87e5cdd0.css",
+    "main.js": "/gatos-unidos/static/js/main.ff55ab26.js",
+    "static/js/453.2a82e7ac.chunk.js": "/gatos-unidos/static/js/453.2a82e7ac.chunk.js",
+    "static/media/nuevoamigo3.jpg": "/gatos-unidos/static/media/nuevoamigo3.e3cecff4145ffe1f761b.jpg",
+    "static/media/logo-gatos-unidos.png": "/gatos-unidos/static/media/logo-gatos-unidos.83d44cc063634ed795fb.png",
+    "static/media/clinica1.jpg": "/gatos-unidos/static/media/clinica1.38d0fcea1ca735b06956.jpg",
+    "static/media/contacto_whatsapp.png": "/gatos-unidos/static/media/contacto_whatsapp.93e1cce83b318e327303.png",
+    "static/media/nuevoamigo1.jpg": "/gatos-unidos/static/media/nuevoamigo1.926d74d6c9cf975481a6.jpg",
+    "static/media/reportar_gato.jpg": "/gatos-unidos/static/media/reportar_gato.a00ed01f803458fd42d7.jpg",
+    "static/media/donacion.jpg": "/gatos-unidos/static/media/donacion.af6197eb93661496468f.jpg",
+    "static/media/contacto_tlf.png": "/gatos-unidos/static/media/contacto_tlf.a7da47116c3ece167395.png",
+    "static/media/nuevoamigo2.jpg": "/gatos-unidos/static/media/nuevoamigo2.686b2f91768ff59cc6fe.jpg",
+    "static/media/adoptar.jpg": "/gatos-unidos/static/media/adoptar.83155b37f6e641e5790b.jpg",
+    "index.html": "/gatos-unidos/index.html",
+    "main.87e5cdd0.css.map": "/gatos-unidos/static/css/main.87e5cdd0.css.map",
+    "main.ff55ab26.js.map": "/gatos-unidos/static/js/main.ff55ab26.js.map",
+    "453.2a82e7ac.chunk.js.map": "/gatos-unidos/static/js/453.2a82e7ac.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.87e5cdd0.css",
+    "static/js/main.ff55ab26.js"
+  ]
+}
