@@ -1,0 +1,115 @@
+/* HEADER */
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  background-color: white;
+  height: 110px;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+nav li {
+  text-align: center;
+}
+
+nav li a {
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: 096674;
+  font-size: 22px;
+  text-align: center;
+}
+
+nav a:hover {
+  color: #04c2df;
+  border-radius: 5px;
+  background-color: aliceblue;
+}
+/* FIN HEADER */
+
+/* LOGO GATOS UNIDOS */
+.imgLogo {
+  width: 100px;
+  height: 90px;
+  margin: 10px;
+  margin-right: 20px;
+  border-radius: 5px;
+}
+
+
+/* ESTILO BODY */
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: white;
+    margin: 0;
+    padding: 0;
+    background-color: #292929;
+  }
+  
+/* DIV PRINCIPAL PARA TODAS LAS PAGINAS */
+.content {
+  margin-top: 5%;
+}
+
+
+table {
+  width: 70%;
+  margin: auto;
+  border-spacing: 30px; /* Espacio entre celdas */
+  border-collapse: separate; /* Necesario para que funcione */
+}
+
+table th {
+  font-size: 25px;
+  text-align: center;
+}
+
+table td {
+  text-align: center;
+
+  border-spacing: 5px;
+}
+
+table img {
+  width: 300px;
+  height: 200px;
+  display: block; /* Elimina el espacio extra debajo de la imagen */
+  margin: 0 auto; /* Centra la imagen dentro de la celda */
+  border-radius: 5px; /* Efecto borde */
+}
+
+/* PAGINA ABOUT-US */
+.contenido-about-us {
+  margin-top: 20px;
+  font-family: 'Arial', sans-serif; /* Tipo de fuente */
+  line-height: 1.6; /* Espaciado entre líneas */
+  padding: 20px; /* Espacio alrededor del texto */
+  background-color: #f4f4f4; /* Fondo suave */
+  border-radius: 10px; /* Bordes redondeados */
+  max-width: 800px; /* Ancho máximo */
+  margin: 0 auto; /* Centrado */
+  text-align: justify; /* Justifica el texto para que todas las líneas sean del mismo ancho */
+}
+
+.contenido-about-us p {
+  color: #292929;
+  text-indent: 30px; /* Sangría en el primer párrafo */
+  margin-bottom: 15px; /* Espacio entre párrafos */
+  font-size: 16px; /* Tamaño de fuente */
+}
+
+.fotoContacto {
+  width: 50px;
+  height: 50px;
+}
