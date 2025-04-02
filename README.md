@@ -34,3 +34,4 @@
 4. Configurar React Router para la Navegación
 5. Subir el Proyecto a GitHub
 6. Configurar GitHub Pages para Despliegue
+## Fase 2 Terminada (v1.1.0)
