@@ -3,7 +3,7 @@ import gato1 from '../img/nuevoamigo1.jpg';
 import gato2 from '../img/nuevoamigo2.jpg';
 import gato3 from '../img/nuevoamigo3.jpg';
 
-const Index = () => {
+const Gatos = () => {
     return (
         <div>
             <div className="content">
@@ -25,4 +25,4 @@ const Index = () => {
     );
 };
 
-export default Index;
+export default Gatos;
