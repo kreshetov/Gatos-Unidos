@@ -7,7 +7,7 @@ const NavBar = () => {
         <nav>
             <img src={logoWeb} className="imgLogo" />
             <ul>
-                <li> <Link to="Index"> Inicio </Link> </li>
+                <li> <Link to="Gatos"> Gatos </Link> </li>
                 <li> <Link to="AboutUs"> ¿Quiénes Somos? </Link> </li>
                 <li> <Link to="Clinics"> Clinicas </Link> </li>
                 <li> <Link to="Colaborate"> Colabora </Link> </li>
