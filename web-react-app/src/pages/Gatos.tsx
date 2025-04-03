@@ -1,28 +1,56 @@
-import react from 'react';
-import gato1 from '../img/nuevoamigo1.jpg';
-import gato2 from '../img/nuevoamigo2.jpg';
-import gato3 from '../img/nuevoamigo3.jpg';
+import react, { useEffect, useState} from 'react';
 
+// La interfaz describe solo la estructura de los objetos (gatos).
+// Cada gato tiene: un id, un nombre, una foto (url) y una descripcion.
+// Es la que misma estructua que se ha declarado en el JSON simulado de mocksv
+interface interfazGatos {
+  id: number;
+  nombre : string;
+  foto: string;
+  descripcion: string;
+}
+
+// Componente Gatos
 const Gatos = () => {
-    return (
-        <div>
-            <div className="content">
-            <table>
-          <tr> <th colSpan={3}> Nuestros nuevos amigos </th> </tr>
-          <tr>
-            <td> <p> Bollito </p> <img src={gato1} /> </td>
-            <td> <p> Greiwo </p> <img src={gato2} /> </td>
-            <td> <p> Arigato </p> <img src={gato3} /> </td>
-          </tr>
-          <tr>
-            <td> <p> ¡Hola! Me llamo Bollito y soy un gatito muy tierno y cariñoso. Me encanta acurrucarme y recibir mimos, pero también disfruto jugar con mis juguetes y explorar rincones nuevos. </p> </td>
-            <td> <p> ¡Miau! Soy Greiwo y no me dejo intimidar por nadie. Me gusta jugar rudo, trepar a los muebles y a veces hago travesuras. Aunque pueda parecer un poco gruñón, en el fondo quiero mucho a mi familia. </p> </td>
-            <td> <p> ¡Hola, al habla Arigato! A veces soy tranquilo y otras veces un torbellino de energía. Me gusta correr, dormir en los lugares más extraños y robarle la comida a mis humanos cuando no están viendo. </p> </td>
-          </tr>
-        </table> 
-            </div>
-        </div>
-    );
-};
+  // gatos es un array que tiene la estructura de la interfaz
+  // setGatos actuliza el estado 
+  // useState indica que el estado es un array con la estructura de la interdaz
+  const [gatos, setGatos] = useState<interfazGatos[]>([]);
+
+  useEffect(()=> {
+    // realiza la solicitud http a la url para obtener los datos
+    // fetch devuelve una promesa que se resolvera una vez obtenidos los datos
+    fetch('https://8b9906b6-52d0-46f4-9ade-8c42fd35b5e6.mock.pstmn.io/Gatos')
+      // se convierte la respuesta a json
+      .then((response => response.json())
+      // los datos del json se usan para actualizar el estado
+)     .then((data) => setGatos(data))
+      // manejo y captura de erorres
+      .then((error) => console.error("Error el obtener listado de gatos", error));
+  }, []); // El array vacio dado como segundo parametro indica que solo se actualiza 1 vez
+
+  return (
+  <div>
+    <div className="content">
+      <table>
+        <tr> <th colSpan={3}> Nuestros nuevos amigos </th> </tr>
+        <tr>
+          {gatos.map((gato) => (
+            <td key={gato.id}>
+            <p> {gato.nombre} </p>
+            <img src={gato.foto} alt={gato.nombre} style={{width:"300px", height:"200px"}} />
+          </td>
+          ))}
+        </tr>
+        <tr>
+          {gatos.map((gato) => (
+            <td key={gato.id}> <p> {gato.descripcion} </p> </td>
+          ))}
+        </tr>
+      </table> 
+    </div>
+  </div>
+  );
+  };
 
 export default Gatos;
