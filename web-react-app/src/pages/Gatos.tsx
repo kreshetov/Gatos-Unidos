@@ -1,56 +1,72 @@
-import react, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-// La interfaz describe solo la estructura de los objetos (gatos).
-// Cada gato tiene: un id, un nombre, una foto (url) y una descripcion.
-// Es la que misma estructua que se ha declarado en el JSON simulado de mocksv
+// Interfaz que define la estructura de los datos de los gatos
 interface interfazGatos {
-  id: number;
-  nombre : string;
-  foto: string;
-  descripcion: string;
+    id: number;
+    nombre: string;
+    foto: string;
+    descripcion: string;
 }
 
-// Componente Gatos
 const Gatos = () => {
-  // gatos es un array que tiene la estructura de la interfaz
-  // setGatos actuliza el estado 
-  // useState indica que el estado es un array con la estructura de la interdaz
-  const [gatos, setGatos] = useState<interfazGatos[]>([]);
+    // Definir el estado para los gatos
+    const [gatos, setGatos] = useState<interfazGatos[]>([]);
+    const { id } = useParams<{ id: string }>(); // Extraemos el id de la URL
 
-  useEffect(()=> {
-    // realiza la solicitud http a la url para obtener los datos
-    // fetch devuelve una promesa que se resolvera una vez obtenidos los datos
-    fetch('https://18ac713d-df52-4e1c-9094-6b8cd5ec4016.mock.pstmn.io/Gatos')
-      // se convierte la respuesta a json
-      .then((response => response.json())
-      // los datos del json se usan para actualizar el estado
-)     .then((data) => setGatos(data))
-      // manejo y captura de erorres
-      .then((error) => console.error("Error el obtener listado de gatos", error));
-  }, []); // El array vacio dado como segundo parametro indica que solo se actualiza 1 vez
+    useEffect(() => {
+        fetch('https://18ac713d-df52-4e1c-9094-6b8cd5ec4016.mock.pstmn.io/Gatos')
+            .then((response) => response.json())
+            .then((data) => setGatos(data))
+            .catch((error) => console.error('Error al obtener listado de gatos', error));
+    }, []);
 
-  return (
-  <div>
-    <div className="content">
-      <table>
-        <tr> <th colSpan={3}> Nuestros nuevos amigos </th> </tr>
-        <tr>
-          {gatos.map((gato) => (
-            <td key={gato.id}>
-            <p> {gato.nombre} </p>
-            <img src={gato.foto} alt={gato.nombre} style={{width:"300px", height:"200px"}} />
-          </td>
-          ))}
-        </tr>
-        <tr>
-          {gatos.map((gato) => (
-            <td key={gato.id}> <p> {gato.descripcion} </p> </td>
-          ))}
-        </tr>
-      </table> 
-    </div>
-  </div>
-  );
-  };
+    // Si hay un id en la URL, filtra el gato correspondiente
+    let gatoSeleccionado = null;
+    if (id) {
+        gatoSeleccionado = gatos.find((gato) => gato.id === parseInt(id));
+    } else {
+        gatoSeleccionado = null;
+    }
+
+    return (
+        <div>
+            <div className="content">
+                <div className="informacionGatos">
+                    {(() => {
+                        if (gatoSeleccionado) {
+                            // Si existe un id, mostrar solo el gato seleccionado
+                            return (
+                                <div className="gato">
+                                    <h3>{gatoSeleccionado.nombre}</h3>
+                                    <img
+                                        src={gatoSeleccionado.foto}
+                                        alt={gatoSeleccionado.nombre}
+                                        style={{ width: '300px', height: '200px' }}
+                                    />
+                                    <p>{gatoSeleccionado.descripcion}</p>
+                                </div>
+                            );
+                        } else {
+                            // Si no hay id, mostrar todos los gatos directamente dentro de informacionGatos
+                            return gatos.map((gato) => (
+                                <div className="gato" key={gato.id}>
+                                    <h3>{gato.nombre}</h3>
+                                    <img
+                                        src={gato.foto}
+                                        alt={gato.nombre}
+                                        style={{ width: '300px', height: '200px' }}
+                                    />
+                                    <p>{gato.descripcion}</p>
+                                </div>
+                            ));
+                        }
+                    })()}
+                </div>
+            </div>
+        </div>
+    );
+};
 
 export default Gatos;
+
