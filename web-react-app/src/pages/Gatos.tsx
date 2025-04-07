@@ -20,7 +20,7 @@ const Gatos = () => {
   useEffect(()=> {
     // realiza la solicitud http a la url para obtener los datos
     // fetch devuelve una promesa que se resolvera una vez obtenidos los datos
-    fetch('https://8b9906b6-52d0-46f4-9ade-8c42fd35b5e6.mock.pstmn.io/Gatos')
+    fetch('https://18ac713d-df52-4e1c-9094-6b8cd5ec4016.mock.pstmn.io/Gatos')
       // se convierte la respuesta a json
       .then((response => response.json())
       // los datos del json se usan para actualizar el estado
