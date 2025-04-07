@@ -13,12 +13,17 @@ function App() {
     <Router>
       <NavBar />
       <Routes>
+        {/* Ruta principal de Gatos */}
         <Route path="/" element={<Gatos />} />
-        <Route path="Gatos" element={<Gatos />} />
-        <Route path="AboutUs" element={<AboutUs />} />
-        <Route path="Clinics" element={<Clinics />} />
-        <Route path="Colaborate" element={<Colaborate />} />
-        <Route path="ContactUs" element={<ContactUs />} />
+        <Route path="/Gatos" element={<Gatos />} />
+        <Route path="/Gatos/:id" element={<Gatos />} />
+        
+        {/* Rutas de otras páginas */}
+        <Route path="/AboutUs" element={<AboutUs />} />
+        <Route path="/Clinics" element={<Clinics />} />
+        <Route path="/Clinics/:id" element={<Clinics />} />
+        <Route path="/Colaborate" element={<Colaborate />} />
+        <Route path="/ContactUs" element={<ContactUs />} />
       </Routes>
     </Router>
   );
