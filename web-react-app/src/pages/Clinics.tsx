@@ -12,7 +12,7 @@ const Clinics = () => {
     const[clinicas, setClinicas] = useState<interfazClinicas[]>([]);
 
     useEffect(() => {
-        fetch('https://8b9906b6-52d0-46f4-9ade-8c42fd35b5e6.mock.pstmn.io/Clinics')
+        fetch('https://18ac713d-df52-4e1c-9094-6b8cd5ec4016.mock.pstmn.io/Clnics')
         .then((response => response.json()))
         .then((data) => setClinicas(data))
         .then((error) => console.error("Error al obtener el listado de clinicas", error));
