@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'; // Cambiar a HashRouter
 import NavBar from './pages/NavBar';
 import Gatos from './pages/Gatos';
 import AboutUs from './pages/AboutUs';
@@ -10,18 +10,19 @@ import './style.css';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/">
       <NavBar />
       <Routes>
-        {/* Ruta principal de Gatos */}
-        <Route path="/" element={<Gatos />} />
+        {/* Rutas para Gatos */}
         <Route path="/Gatos" element={<Gatos />} />
         <Route path="/Gatos/:id" element={<Gatos />} />
-        
-        {/* Rutas de otras páginas */}
-        <Route path="/AboutUs" element={<AboutUs />} />
+
+        {/* Rutas para Clínicas */}
         <Route path="/Clinics" element={<Clinics />} />
         <Route path="/Clinics/:id" element={<Clinics />} />
+
+        {/* Otras rutas */}
+        <Route path="/AboutUs" element={<AboutUs />} />
         <Route path="/Colaborate" element={<Colaborate />} />
         <Route path="/ContactUs" element={<ContactUs />} />
       </Routes>
