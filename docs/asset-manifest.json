@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/gatos-unidos/static/css/main.1acd4003.css",
+    "main.css": "/gatos-unidos/static/css/main.f0f0e2bc.css",
     "main.js": "/gatos-unidos/static/js/main.e1fa46cf.js",
     "static/js/453.2a82e7ac.chunk.js": "/gatos-unidos/static/js/453.2a82e7ac.chunk.js",
     "static/media/contacto_whatsapp.png": "/gatos-unidos/static/media/contacto_whatsapp.93e1cce83b318e327303.png",
@@ -10,12 +10,12 @@
     "static/media/contacto_tlf.png": "/gatos-unidos/static/media/contacto_tlf.a7da47116c3ece167395.png",
     "static/media/adoptar.jpg": "/gatos-unidos/static/media/adoptar.83155b37f6e641e5790b.jpg",
     "index.html": "/gatos-unidos/index.html",
-    "main.1acd4003.css.map": "/gatos-unidos/static/css/main.1acd4003.css.map",
+    "main.f0f0e2bc.css.map": "/gatos-unidos/static/css/main.f0f0e2bc.css.map",
     "main.e1fa46cf.js.map": "/gatos-unidos/static/js/main.e1fa46cf.js.map",
     "453.2a82e7ac.chunk.js.map": "/gatos-unidos/static/js/453.2a82e7ac.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1acd4003.css",
+    "static/css/main.f0f0e2bc.css",
     "static/js/main.e1fa46cf.js"
   ]
 }
