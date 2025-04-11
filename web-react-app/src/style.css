@@ -64,8 +64,9 @@ nav a:visited {
 
 /* body */
 body {
+  min-height: 100vh;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  color: white;
+  color: black;
   margin: 0 auto;
   padding: 0;
   background-color: white;
@@ -212,5 +213,7 @@ table img {
 footer {
   text-align: center;
   background-color: #1e4050;
+  width: 80%;
   color: white;
+  margin: 0 auto
 }
