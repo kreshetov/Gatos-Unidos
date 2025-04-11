@@ -43,6 +43,10 @@ nav a:hover {
 nav a:visited {
   color: white;
 }
+
+nav a:link {
+  color: white;
+}
 /* -------------------------------------------------------------------------*/
 
 
