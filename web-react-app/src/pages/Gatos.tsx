@@ -15,7 +15,7 @@ const Gatos = () => {
     const { id } = useParams<{ id: string }>(); // Extraemos el id de la URL
 
     useEffect(() => {
-        fetch('https://18ac713d-df52-4e1c-9094-6b8cd5ec4016.mock.pstmn.io/Gatos')
+        fetch('https://d4bc0a96-96f3-438e-9801-5a3937946062.mock.pstmn.io/Gatos ')
             .then((response) => response.json())
             .then((data) => setGatos(data))
             .catch((error) => console.error('Error al obtener listado de gatos', error));
