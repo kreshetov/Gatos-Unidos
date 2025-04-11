@@ -11,11 +11,8 @@ import './style.css';
 
 function App() {
   return (
-    <div className="app-wrapper">
       <Router basename="/">
-        <div className="layout">
           <NavBar />
-          <main className="main-content">
             <Routes>
               <Route path="/Gatos" element={<Gatos />} />
               <Route path="/Gatos/:id" element={<Gatos />} />
@@ -25,11 +22,8 @@ function App() {
               <Route path="/Colaborate" element={<Colaborate />} />
               <Route path="/ContactUs" element={<ContactUs />} />
             </Routes>
-          </main>
           <Footer />
-        </div>
       </Router>
-    </div>
   );
 }
 
