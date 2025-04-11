@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import logoWeb from '../img/logo-gatos-unidos.png';
+import logoWeb from '../img/favicon32x32-transparente.png';
 
 const NavBar = () => {
     return (
