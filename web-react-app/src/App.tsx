@@ -1,7 +1,8 @@
 import React from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom'; // Cambiar a HashRouter
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'; 
 import NavBar from './pages/NavBar';
 import Gatos from './pages/Gatos';
+import Gato from './pages/Gato';
 import AboutUs from './pages/AboutUs';
 import Clinics from './pages/Clinics';
 import Colaborate from './pages/Colaborate';
@@ -15,7 +16,7 @@ function App() {
           <NavBar />
             <Routes>
               <Route path="/Gatos" element={<Gatos />} />
-              <Route path="/Gatos/:id" element={<Gatos />} />
+              <Route path="/Gatos/:id" element={<Gato />} />
               <Route path="/Clinics" element={<Clinics />} />
               <Route path="/Clinics/:id" element={<Clinics />} />
               <Route path="/AboutUs" element={<AboutUs />} />

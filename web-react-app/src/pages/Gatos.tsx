@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // Interfaz que define la estructura de los datos de los gatos
 interface interfazGatos {
@@ -12,56 +12,25 @@ interface interfazGatos {
 const Gatos = () => {
     // Definir el estado para los gatos
     const [gatos, setGatos] = useState<interfazGatos[]>([]);
-    const { id } = useParams<{ id: string }>(); // Extraemos el id de la URL
 
     useEffect(() => {
-        fetch('https://d4bc0a96-96f3-438e-9801-5a3937946062.mock.pstmn.io/Gatos ')
+        fetch('https://d4bc0a96-96f3-438e-9801-5a3937946062.mock.pstmn.io/Gatos')
             .then((response) => response.json())
             .then((data) => setGatos(data))
             .catch((error) => console.error('Error al obtener listado de gatos', error));
     }, []);
 
-    // Si hay un id en la URL, filtra el gato correspondiente
-    let gatoSeleccionado = null;
-    if (id) {
-        gatoSeleccionado = gatos.find((gato) => gato.id === parseInt(id));
-    } else {
-        gatoSeleccionado = null;
-    }
-
     return (
         <div>
             <div className="content">
                 <div className="informacionGatos">
-                    {(() => {
-                        if (gatoSeleccionado) {
-                            // Si existe un id, mostrar solo el gato seleccionado
-                            return (
-                                <div className="gato">
-                                    <h3>{gatoSeleccionado.nombre}</h3>
-                                    <img
-                                        src={gatoSeleccionado.foto}
-                                        alt={gatoSeleccionado.nombre}
-                                        style={{ width: '300px', height: '200px' }}
-                                    />
-                                    <p>{gatoSeleccionado.descripcion}</p>
-                                </div>
-                            );
-                        } else {
-                            // Si no hay id, mostrar todos los gatos directamente dentro de informacionGatos
-                            return gatos.map((gato) => (
-                                <div className="gato" key={gato.id}>
-                                    <h3>{gato.nombre}</h3>
-                                    <img
-                                        src={gato.foto}
-                                        alt={gato.nombre}
-                                        style={{ width: '300px', height: '200px' }}
-                                    />
-                                    <p>{gato.descripcion}</p>
-                                </div>
-                            ));
-                        }
-                    })()}
+                    {gatos.map((gato) => (
+                        <div className="gatos" key={gato.id}>
+                            <h3>{gato.nombre}</h3>
+                            <Link to={`/Gatos/${gato.id}`}> <img src={gato.foto}alt={gato.nombre} /> </Link>
+                            <p>{gato.descripcion}</p>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
