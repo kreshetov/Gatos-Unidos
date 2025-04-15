@@ -5,6 +5,7 @@ import Gatos from './pages/Gatos';
 import Gato from './pages/Gato';
 import AboutUs from './pages/AboutUs';
 import Clinics from './pages/Clinics';
+import Clinica from './pages/Clinica';
 import Colaborate from './pages/Colaborate';
 import ContactUs from './pages/ContactUs';
 import Footer from './pages/Footer'
@@ -18,7 +19,7 @@ function App() {
               <Route path="/Gatos" element={<Gatos />} />
               <Route path="/Gatos/:id" element={<Gato />} />
               <Route path="/Clinics" element={<Clinics />} />
-              <Route path="/Clinics/:id" element={<Clinics />} />
+              <Route path="/Clinics/:id" element={<Clinica />} />
               <Route path="/AboutUs" element={<AboutUs />} />
               <Route path="/Colaborate" element={<Colaborate />} />
               <Route path="/ContactUs" element={<ContactUs />} />
