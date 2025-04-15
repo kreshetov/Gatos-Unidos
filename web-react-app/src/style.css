@@ -187,7 +187,7 @@ body {
   }
   
   /* Estilo para cada clinica */
-  .clinica{
+  .clinicas{
     background-color: #f4f4f4;
     color: black;
     width: 300px;
@@ -199,12 +199,45 @@ body {
     box-shadow: inset 0 0 20px rgba(30, 64, 80, 0.2);
   }
   /* Estilo de las imágenes de las clinicas */
-  .clinica img {
+  .clinicas img {
     border: 1px solid black;
     border-radius: 10px;
     width: 300px;
     height: 200px;
     box-shadow: 0 0 20px #1e4050;
+  }
+
+
+
+  .informacionClinica {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .clinica {
+    display: flex;
+    align-items: center; /* Centra verticalmente la imagen y la información */
+    gap: 20px; /* Espacio entre la imagen y la información */
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    background-color: #f4f4f4;
+  }
+  
+  .clinica img {
+    border-radius: 10px;
+    width: 300px;
+    height: 200px;
+  }
+  
+  .clinica h3 {
+    font-size: 2rem;
+    margin-bottom: 10px;
   }
 /* -------------------------------------------------------------------------*/
 
