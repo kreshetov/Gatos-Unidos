@@ -1,0 +1,12 @@
+.contenido-about-us {
+    margin: 20px;
+    font-family: 'Arial', sans-serif; /* Tipo de fuente */
+    line-height: 1.6; /* Espaciado entre líneas */
+    padding: 20px; /* Espacio alrededor del texto */
+    background-color: #f4f4f4; /* Fondo suave */
+    border-radius: 10px; /* Bordes redondeados */
+    max-width: 800px; /* Ancho máximo */
+    margin: 0 auto; /* Centrado */
+    text-align: justify; /* Justifica el texto para que todas las líneas sean del mismo ancho */
+  }
+  

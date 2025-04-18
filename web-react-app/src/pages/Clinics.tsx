@@ -23,6 +23,7 @@ const Clinics = () => {
     return (
         <div>
             <div className="content">
+                <p className="tituloClinicas">Clínicas que Apoyan Nuestra Causa</p>
                 <div className="informacionClinicas">
                     {clinicas.map((clinica) => (
                         <div className="clinicas" key={clinica.id}>
