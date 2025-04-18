@@ -1,21 +1,22 @@
 {
   "files": {
-    "main.css": "/gatos-unidos/static/css/main.83d4b4b5.css",
-    "main.js": "/gatos-unidos/static/js/main.9475dc83.js",
+    "main.css": "/gatos-unidos/static/css/main.49c406e0.css",
+    "main.js": "/gatos-unidos/static/js/main.a5d043d7.js",
     "static/js/453.2a82e7ac.chunk.js": "/gatos-unidos/static/js/453.2a82e7ac.chunk.js",
     "static/media/contacto_whatsapp.png": "/gatos-unidos/static/media/contacto_whatsapp.93e1cce83b318e327303.png",
     "static/media/favicon32x32-transparente.png": "/gatos-unidos/static/media/favicon32x32-transparente.3440602ca8328422f226.png",
     "static/media/reportar_gato.jpg": "/gatos-unidos/static/media/reportar_gato.a00ed01f803458fd42d7.jpg",
     "static/media/donacion.jpg": "/gatos-unidos/static/media/donacion.af6197eb93661496468f.jpg",
     "static/media/contacto_tlf.png": "/gatos-unidos/static/media/contacto_tlf.a7da47116c3ece167395.png",
+    "static/media/fondo-web.jpg": "/gatos-unidos/static/media/fondo-web.62bfa2d72168e1afe017.jpg",
     "static/media/adoptar.jpg": "/gatos-unidos/static/media/adoptar.83155b37f6e641e5790b.jpg",
     "index.html": "/gatos-unidos/index.html",
-    "main.83d4b4b5.css.map": "/gatos-unidos/static/css/main.83d4b4b5.css.map",
-    "main.9475dc83.js.map": "/gatos-unidos/static/js/main.9475dc83.js.map",
+    "main.49c406e0.css.map": "/gatos-unidos/static/css/main.49c406e0.css.map",
+    "main.a5d043d7.js.map": "/gatos-unidos/static/js/main.a5d043d7.js.map",
     "453.2a82e7ac.chunk.js.map": "/gatos-unidos/static/js/453.2a82e7ac.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.83d4b4b5.css",
-    "static/js/main.9475dc83.js"
+    "static/css/main.49c406e0.css",
+    "static/js/main.a5d043d7.js"
   ]
 }
