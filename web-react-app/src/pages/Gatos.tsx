@@ -23,6 +23,7 @@ const Gatos = () => {
     return (
         <div>
             <div className="content">
+                <p className="tituloGatos">Conoce a Nuestros Gatos en Adopción</p>
                 <div className="informacionGatos">
                     {gatos.map((gato) => (
                         <div className="gatos" key={gato.id}>

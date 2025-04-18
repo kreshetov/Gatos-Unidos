@@ -1,5 +1,7 @@
 import React from 'react';
+// Usando react-router para navegar entre componentes
 import { HashRouter as Router, Routes, Route } from 'react-router-dom'; 
+// Importando componentes
 import NavBar from './pages/NavBar';
 import Gatos from './pages/Gatos';
 import Gato from './pages/Gato';
@@ -9,7 +11,17 @@ import Clinica from './pages/Clinica';
 import Colaborate from './pages/Colaborate';
 import ContactUs from './pages/ContactUs';
 import Footer from './pages/Footer'
-import './style.css';
+// Importando estilos css
+import './css/AboutUs.css';
+import './css/Clinica.css';
+import './css/Clinics.css';
+import './css/Colaborate.css';  
+import './css/ContactUs.css';
+import './css/Footer.css';
+import './css/Gato.css';  
+import './css/Gatos.css';
+import './css/NavBar.css';
+import './css/style.css';
 
 function App() {
   return (
@@ -28,6 +40,5 @@ function App() {
       </Router>
   );
 }
-
 
 export default App;

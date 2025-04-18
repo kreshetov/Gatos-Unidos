@@ -5,7 +5,7 @@ import logoWeb from '../img/favicon32x32-transparente.png';
 const NavBar = () => {
     return (
         <nav>
-            <img src={logoWeb} className="imgLogo" />
+            <img src={logoWeb} className="logo-gatos-unidos" />
             <ul>
                 <li> <Link to="Gatos"> Gatos </Link> </li>
                 <li> <Link to="AboutUs"> ¿Quiénes Somos? </Link> </li>

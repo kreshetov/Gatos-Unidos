@@ -28,14 +28,18 @@ const Gato = () => {
 
     return (
         <div>
-            <div className="informacionGato">
-                <div className="gato" key={gato.id}>
-                    <img src={gato.foto} alt={gato.nombre} />
-                    <p>Conoce a {gato.nombre}</p>
-                    <p>{gato.raza}</p>
-                    <p>{gato.edad}</p>
-                    <p>{gato.sexo}</p>
-                    <p>{gato.descripcion}</p>
+            <div className="content">
+                <div className="informacionGato">
+                    <div className="gato" key={gato.id}>
+                        <img src={gato.foto} alt={gato.nombre} />
+                    </div>
+                    <div className="textoGato">
+                            <p>Conoce a {gato.nombre}</p>
+                            <p>{gato.raza}</p>
+                            <p>{gato.edad}</p>
+                            <p>{gato.sexo}</p>
+                            <p>{gato.descripcion}</p>
+                    </div>
                 </div>
             </div>
         </div>

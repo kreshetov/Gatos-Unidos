@@ -1,0 +1,36 @@
+body {
+  min-height: 100vh;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: black;
+  margin: 0 auto;
+  padding: 0;
+  background-color: white;
+  background-image: url(../img/fondo-web.jpg);
+  width: 80%;
+  height: 100%;
+  background-size: cover;
+}
+
+/* logo gatos unidos */
+.logo-gatos-unidos {
+  width: 85px;
+  height: 80px;
+  margin: 10px;
+  margin-right: 20px;
+  border-radius: 5px;
+}
+
+.logo-gatos-unidos:hover {
+  transition: transform 0.9s ease;
+  transform: rotate(360deg);
+}
+
+/* div principal para todas las paginas, es el primer div del body*/
+.content {
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+}
+
+
