@@ -1,34 +1,43 @@
-import react from 'react';
-import foto_donaciones from '../img/donacion.jpg';
-import foto_adoptar from '../img/adoptar.jpg';
-import foto_reportar from '../img/reportar_gato.jpg';
-
+import React from 'react';
+import { Link } from 'react-router-dom';
 const Colaborate = () => {
     return (
         <div>
             <div className="content">
-            <table>
-          <tr> 
-            <th> Donaciones </th>
-            <th> Adopta, Acoge </th>
-            <th> Reportar animal </th>
-          </tr>
-          <tr>
-              <td> <img src={foto_donaciones} /> </td>
-              <td> <img src={foto_adoptar} /> </td>
-              <td> <img src={foto_reportar} /> </td>
-          </tr>
-          <tr>
-            <td> <p> 1. Económicas: Aportes en dinero que nos permiten financiar tratamientos veterinarios, esterilizaciones y otros cuidados esenciales. </p> 
-                 <p> 2. De alimentos: Donaciones de pienso, latas de comida húmeda o snacks para garantizar una alimentación adecuada a los gatos rescatados. </p>
-                 <p> 3. De juguetes: Juguetes, rascadores o mantas que ayudan a mejorar el bienestar y entretenimiento de los gatos mientras esperan ser adoptados. </p>
-            </td>
-            <td> <p> 1. Adopta un gato y ofrécele un hogar lleno de amor. Dale una nueva oportunidad para ser feliz. </p> 
-                 <p> 2. Acoge un gato temporalmente y ayúdalo mientras espera su hogar definitivo. Tu apoyo hace la diferencia. </p>
-            </td>
-            <td> <p> Reportar un animal: Si encuentras un gato que necesita ayuda, ¡ayúdanos a salvarlo! Reporta el caso y nos encargaremos de ofrecerle la atención y el cuidado que necesita. </p> </td>
-          </tr>
-        </table>   
+                <p className="tituloColabora">Hay muchas formas de ayudar a los gatitos. ¡Colabora con nosotros!</p>
+                <div className="informacionColabora">
+                    <div className="colaboracion">
+                        <p className="encabezadoColabora">
+                            ❤️ Contribuir con recursos</p>
+                        <p className="tipoColaboracion">
+                            (dinero, comida, juguetes)
+                        </p>
+                        <p className="texto">
+                            Ayúdanos a seguir cuidando de ellos. Puedes hacer una donación económica, traer comida, juguetes o cualquier recurso que mejore su bienestar.
+                        </p>
+                        <Link to="/Donar"><button className="boton">¡Quiero Contribuir!</button></Link>
+                    </div>
+                    <div className="colaboracion">
+                        <p className="encabezadoColabora">🐾 Vínculo directo con un gato</p>
+                        <p className="tipoColaboracion">
+                            (adopción, acogida temporal, apadrinamiento)
+                        </p>
+                        <p className="texto">
+                            Cambia su vida y la tuya. Adopta, acoge por un tiempo o apadrina a un gato para ser parte activa de su historia.
+                        </p>
+                        <Link to="/Adoptar"><button className="boton">¡Quiero Involucrarme!</button></Link>
+                    </div>
+                    <div className="colaboracion">
+                        <p className="encabezadoColabora">🚨 Reportar un gato en apuros</p>
+                        <p className="tipoColaboracion">
+                            (gato perdido, herido, abandonado)
+                        </p>
+                        <p className="texto">
+                        Tú puedes marcar la diferencia. Si ves un gato que necesita ayuda, cuéntanos. Nuestro equipo intentará actuar lo antes posible para rescatarlo y darle la atención que necesita.
+                        </p>
+                        <Link to="/Reportar"><button className="boton">¡Quiero reportar un caso!</button></Link>
+                    </div>
+                </div>
             </div>
         </div>
     );

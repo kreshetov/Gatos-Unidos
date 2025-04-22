@@ -1,24 +1,65 @@
-table {
-    width: 70%;
-    margin: auto;
-    border-spacing: 30px; /* Espacio entre celdas */
-    border-collapse: separate; /* Necesario para que funcione */
-  }
-  
-  table th {
-    font-size: 25px;
-    text-align: center;
-  }
-  
-  table td {
-    text-align: center;
-    border-spacing: 5px;
-  }
-  
-  table img {
-    width: 300px;
-    height: 200px;
-    display: block; /* Elimina el espacio extra debajo de la imagen */
-    margin: 0 auto; /* Centra la imagen dentro de la celda */
-    border-radius: 5px; /* Efecto borde */
-  }
+.tituloColabora {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #1e4050;
+}
+
+.informacionColabora {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 16px;
+  color: #1e4050;
+  text-align: center;
+  gap: 20px;
+}
+
+.colaboracion {
+  color: black;
+  width: 350px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+
+.info {
+  text-decoration: underline;
+}
+
+.encabezadoColabora {
+  font-size: 25px;
+  font-weight: bold;
+  color: #1e4050;
+  text-align: center;
+}
+
+.tipoColaboracion {
+  font-size: 18px;
+  font-style: italic;
+  color: #5893a4;
+  text-align: center;
+
+}
+
+.boton {
+  background-color: yellow;
+  padding: 10px;
+  border-radius: 15px;
+  font-size: 15px;
+}
+
+.texto {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 16px;
+  color: #1e4050;
+  text-align: center;
+}
+
+.boton:hover {
+  background-color: red;
+  color: white;
+  cursor: pointer;
+}
