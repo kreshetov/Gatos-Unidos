@@ -11,6 +11,9 @@ import Clinica from './pages/Clinica';
 import Colaborate from './pages/Colaborate';
 import ContactUs from './pages/ContactUs';
 import Footer from './pages/Footer'
+import Donar from './pages/Donar';
+import Adoptar from './pages/Adoptar';
+import Reportar from './pages/Reportar';
 // Importando estilos css
 import './css/AboutUs.css';
 import './css/Clinica.css';
@@ -34,6 +37,9 @@ function App() {
               <Route path="/Clinics/:id" element={<Clinica />} />
               <Route path="/AboutUs" element={<AboutUs />} />
               <Route path="/Colaborate" element={<Colaborate />} />
+              <Route path="/Donar" element={<Donar />} />
+              <Route path="/Adoptar" element={<Adoptar />} />
+              <Route path="/Reportar" element={<Reportar />} />
               <Route path="/ContactUs" element={<ContactUs />} />
             </Routes>
           <Footer />
