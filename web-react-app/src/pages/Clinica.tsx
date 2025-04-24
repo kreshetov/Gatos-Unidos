@@ -13,7 +13,7 @@ const Clinica = () => {
     const [clinica, setClinica] = useState<interfazClinica | null>(null);
 
     useEffect(() => {
-        fetch(`https://d4bc0a96-96f3-438e-9801-5a3937946062.mock.pstmn.io/Clinics/${id}`)
+        fetch(`https://storagegatosunidos.blob.core.windows.net/datos/clinica_${id}.json`)
             .then((response) => response.json())
             .then((data) => setClinica(data))
             .catch((error) => console.error('Error al obtener la clinica', error));

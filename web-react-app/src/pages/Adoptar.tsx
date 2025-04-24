@@ -1,5 +1,5 @@
 import React from "react";
-
+import ImgAdoptar from "../img/adoptarv1.png";
 const Adoptar = () => {
   return (
     <div>

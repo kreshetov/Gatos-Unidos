@@ -25,6 +25,7 @@ import './css/Gato.css';
 import './css/Gatos.css';
 import './css/NavBar.css';
 import './css/style.css';
+import './css/Adoptar.css';
 
 function App() {
   return (
