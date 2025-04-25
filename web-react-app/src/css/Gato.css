@@ -1,15 +1,21 @@
 .informacionGato {
-  width: 70%;
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 90%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start; /* mejor para alinear arriba */
   gap: 40px;
-  flex-wrap: wrap;
   padding: 20px;
 }
 
 .gato {
-  background-color: #fff;
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
 }
 
 .gato img {
@@ -19,7 +25,11 @@
 }
 
 .fichaGato {
-  width: 500px;
+  padding: 10px;
+  background: linear-gradient(90deg, #f7f4f4, #e1dbdb);
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   display: flex;
   flex-direction: column;
@@ -39,9 +49,17 @@
   color: #333;
 }
 
+.atributos {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
 .nombre {
   background: linear-gradient(135deg, #ff416c, #ff4b2b);
-  padding: 10px 15px;
+  padding: 10px 10px;
   border-radius: 12px;
   color: white;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -55,7 +73,7 @@
   background: #6a11cb;
   background: linear-gradient(135deg, #6a11cb, #2575fc);
   color: white;
-  padding: 10px 15px;
+  padding: 10px 10px;
   border-radius: 12px;
   font-weight: bold;
 }
@@ -63,7 +81,7 @@
 .fechaDeNacimiento {
   background: linear-gradient(135deg, #00c9ff, #92fe9d);
   color: #002b36;
-  padding: 10px 15px;
+  padding: 10px 10px;
   border-radius: 12px;
   font-weight: bold;
 }
@@ -71,7 +89,7 @@
 .sexo {
   background: linear-gradient(135deg, #f953c6, #b91d73);
   color: white;
-  padding: 10px 15px;
+  padding: 10px 10px;
   border-radius: 12px;
   font-weight: bold;
 }
@@ -79,7 +97,7 @@
 .chip {
   background: linear-gradient(135deg, #ff5f6d, #ffc371);
   color: white;
-  padding: 10px 15px;
+  padding: 10px 10px;
   border-radius: 12px;
   font-weight: bold;
 }
@@ -87,7 +105,7 @@
 .vacunado {
   background: linear-gradient(135deg, #00b09b, #96c93d);
   color: white;
-  padding: 10px 15px;
+  padding: 10px 10px;
   border-radius: 12px;
   font-weight: bold;
 }
@@ -95,7 +113,7 @@
 .esterilizado {
   background: linear-gradient(135deg, #ee9ca7, #ffdde1);
   color: #333;
-  padding: 10px 15px;
+  padding: 10px 10px;
   border-radius: 12px;
   font-weight: bold;
 }
@@ -103,7 +121,7 @@
 .peso {
   background: linear-gradient(135deg, #2193b0, #6dd5ed);
   color: white;
-  padding: 10px 15px;
+  padding: 10px 10px;
   border-radius: 12px;
   font-weight: bold;
 }
@@ -111,7 +129,7 @@
 .personalidad {
   background: linear-gradient(135deg, #c6ffdd, #fbd786, #f7797d);
   color: #333;
-  padding: 10px 15px;
+  padding: 10px 10px;
   border-radius: 12px;
   font-weight: bold;
 }
@@ -119,7 +137,7 @@
 .disponibilidad {
   background: linear-gradient(135deg, #56ab2f, #a8e063);
   color: white;
-  padding: 10px 15px;
+  padding: 10px 10px;
   border-radius: 12px;
   font-weight: bold;
 }
@@ -127,7 +145,7 @@
 .historia {
   background: linear-gradient(135deg, #e96443, #904e95);
   color: white;
-  padding: 10px 15px;
+  padding: 10px 10px;
   border-radius: 12px;
   font-weight: bold;
 }
@@ -135,7 +153,53 @@
 .descripcion {
   background: linear-gradient(135deg, #373B44, #4286f4);
   color: white;
-  padding: 10px 15px;
+  padding: 10px 10px;
   border-radius: 12px;
   font-weight: bold;
+}
+
+.editarFicha {
+  width: 150px;
+  margin-top: 50px;
+  cursor: pointer;
+  padding: 8px 12px;
+  background-color: #abaaaa;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.editarFicha:hover {
+  background-color: #7a7a7a;
+}
+
+.guardarFicha {
+  width: 150px;
+  margin-top: 50px;
+  cursor: pointer;
+  padding: 8px 12px;
+  background-color: #abaaaa;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.guardarFicha:hover {
+  background-color: #7a7a7a;
+}
+
+.input {
+  width: 100px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 13px;
+}
+
+.inputHistoriayDescripcion {
+  width: 50%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 13px;
 }

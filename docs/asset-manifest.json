@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/gatos-unidos/static/css/main.1c6b681e.css",
-    "main.js": "/gatos-unidos/static/js/main.c6ce61bb.js",
+    "main.css": "/gatos-unidos/static/css/main.a4b6804e.css",
+    "main.js": "/gatos-unidos/static/js/main.3065277b.js",
     "static/js/453.2a82e7ac.chunk.js": "/gatos-unidos/static/js/453.2a82e7ac.chunk.js",
     "static/media/contacto_whatsapp.png": "/gatos-unidos/static/media/contacto_whatsapp.93e1cce83b318e327303.png",
     "static/media/favicon32x32-transparente.png": "/gatos-unidos/static/media/favicon32x32-transparente.3440602ca8328422f226.png",
     "static/media/contacto_tlf.png": "/gatos-unidos/static/media/contacto_tlf.a7da47116c3ece167395.png",
     "static/media/fondo-web.jpg": "/gatos-unidos/static/media/fondo-web.62bfa2d72168e1afe017.jpg",
     "index.html": "/gatos-unidos/index.html",
-    "main.1c6b681e.css.map": "/gatos-unidos/static/css/main.1c6b681e.css.map",
-    "main.c6ce61bb.js.map": "/gatos-unidos/static/js/main.c6ce61bb.js.map",
+    "main.a4b6804e.css.map": "/gatos-unidos/static/css/main.a4b6804e.css.map",
+    "main.3065277b.js.map": "/gatos-unidos/static/js/main.3065277b.js.map",
     "453.2a82e7ac.chunk.js.map": "/gatos-unidos/static/js/453.2a82e7ac.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.1c6b681e.css",
-    "static/js/main.c6ce61bb.js"
+    "static/css/main.a4b6804e.css",
+    "static/js/main.3065277b.js"
   ]
 }
