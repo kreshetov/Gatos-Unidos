@@ -14,7 +14,7 @@ const Gatos = () => {
     const [gatos, setGatos] = useState<interfazGatos[]>([]);
 
     useEffect(() => {
-        fetch('https://d4bc0a96-96f3-438e-9801-5a3937946062.mock.pstmn.io/Gatos')
+        fetch('https://storagegatosunidos.blob.core.windows.net/datos/gatos_resumen.json')
             .then((response) => response.json())
             .then((data) => setGatos(data))
             .catch((error) => console.error('Error al obtener listado de gatos', error));

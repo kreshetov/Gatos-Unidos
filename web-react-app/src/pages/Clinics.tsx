@@ -14,9 +14,12 @@ const Clinics = () => {
     const [clinicas, setClinicas] = useState<interfazClinicas[]>([]);
 
     useEffect(() => {
-        fetch('https://d4bc0a96-96f3-438e-9801-5a3937946062.mock.pstmn.io/Clincs')
+        fetch('https://storagegatosunidos.blob.core.windows.net/datos/clinicas_resumen.json')
             .then((response) => response.json())
-            .then((data) => setClinicas(data))
+            .then((data) => {
+                console.log(data); // Verifica los datos
+                setClinicas(data);
+            })
             .catch((error) => console.error('Error al obtener el listado de clínicas', error));
     }, []);
 
