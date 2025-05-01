@@ -60,7 +60,7 @@ const Gato = () => {
     // Al editar la ficha, se copian los valores del gato a los campos de edición
     // De momento estamos realizando pruebas en Postman, por lo que no se guardan los cambios en la API
     const putGato = () => {
-        // Se envuçia una solicitud PUT a la API para actualizar la información del gato
+        // Se envia una solicitud PUT a la API para actualizar la información del gato
          fetch(`https://30f6ed45-fb84-480e-8cb7-5dc79fe76a6d.mock.pstmn.io/Gatos/${gato.id}`, {
             method: 'PUT', // Método PUT para actualizar el gato
             headers: {
