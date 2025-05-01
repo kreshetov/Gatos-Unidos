@@ -32,6 +32,7 @@ function App() {
       <Router basename="/">
           <NavBar />
             <Routes>
+            <Route path="/" element={<Gatos />} />
               <Route path="/Gatos" element={<Gatos />} />
               <Route path="/Gatos/:id" element={<Gato />} />
               <Route path="/Clinics" element={<Clinics />} />
