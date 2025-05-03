@@ -93,7 +93,7 @@ const Gato = () => {
 
     return (
         <div className="content">
-            <div className="informacionGato">
+            <div className="contenedorGato">
                 {!editarGato ? (
                     <>
                     <div className="fichaGato"> {/* Si el usuario no está editando la ficha, se muestra la información del gato */}

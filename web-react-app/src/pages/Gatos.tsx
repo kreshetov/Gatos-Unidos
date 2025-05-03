@@ -24,12 +24,16 @@ const Gatos = () => {
         <div>
             <div className="content">
                 <p className="tituloGatos">Conoce a Nuestros Gatos en Adopción</p>
-                <div className="informacionGatos">
+                <div className="contenedorGatos">
                     {gatos.map((gato) => (
                         <div className="gatos" key={gato.id}>
-                            <h3>{gato.nombre}</h3>
-                            <Link to={`/Gatos/${gato.id}`}> <img src={gato.foto}alt={gato.nombre} /> </Link>
-                            <p>{gato.descripcion}</p>
+                            <div className="gatosFoto">
+                                <Link to={`/Gatos/${gato.id}`}> <img src={gato.foto}alt={gato.nombre} /> </Link>
+                            </div>
+                            <div className="informacionGato">
+                                <p className="nombreGato">{gato.nombre}</p>
+                                <p className="descripcionGato">{gato.descripcion}</p>
+                            </div>
                         </div>
                     ))}
                 </div>
@@ -39,4 +43,3 @@ const Gatos = () => {
 };
 
 export default Gatos;
-
