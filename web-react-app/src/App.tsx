@@ -35,6 +35,7 @@ function App() {
             <Route path="/" element={<Gatos />} />
               <Route path="/Gatos" element={<Gatos />} />
               <Route path="/Gatos/:id" element={<Gato />} />
+              <Route path="/Gatos/insertar?modo=insertar" element={<Gato/>} />
               <Route path="/Clinics" element={<Clinics />} />
               <Route path="/Clinics/:id" element={<Clinica />} />
               <Route path="/AboutUs" element={<AboutUs />} />
