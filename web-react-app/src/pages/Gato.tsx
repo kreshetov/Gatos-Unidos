@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useSearchParams, useParams } from 'react-router-dom';
 
 // Estructura de datos del gato
 interface InterfazGato {
@@ -21,9 +21,10 @@ interface InterfazGato {
 
 // Componente Gato
 const Gato = () => {
-    const { id } = useParams<{ id: string }>();
-    const [gato, setGato] = useState<InterfazGato | null>(null);
-    const [editarGato, setEditarGato] = useState(false);
+    const [searchParams] = useSearchParams(); // Obtener los parámetros de búsqueda de la URL
+    const modo = searchParams.get('modo'); // Obtener el modo de la URL (lectura, editar, crear, eliminar)
+    const { id } = useParams<{ id: string }>(); // Obtener el id del gato desde la URL
+    const [gato, setGato] = useState<InterfazGato | null>(null); // Estado para almacenar los datos del gato
     const [nombreEditado, setNombreEditado] = useState<string>('');
     const [razaEditada, setRazaEditada] = useState<string>('');
     const [sexoEditado, setSexoEditado] = useState<string>(''); 
@@ -38,47 +39,31 @@ const Gato = () => {
     //const [fotoEditada, setFotoEditada] = useState<string>('');
     const [descripcionEditada, setDescripcionEditada] = useState<string>('');
 
-    // Obtener el gato desde la API al cargar el componente (Azure Storage)
-    // useEffect se ejecuta una vez al cargar el componente y cada vez que cambia el id del gato
-    // fetch se utiliza para hacer una solicitud HTTP a la API y obtener los datos del gato
-    // then se utiliza para manejar la respuesta de la API y convertirla a JSON como un objeto de TypeScript
-    // catch se utiliza para manejar cualquier error que ocurra durante la solicitud
-    useEffect(() => {
-        fetch(`https://storagegatosunidos.blob.core.windows.net/datos/gato_${id}.json`)
-            .then((response) => response.json())
-            .then((data) => setGato(data))
-            .catch((error) => console.error('Error al obtener el gato', error));
-    }, [id]); // id solo se ejecuta si cambia el id del gato (es el segundo argumento de useEffect)
-
-    // Al montarse el componente gato vale null, por lo que no se puede acceder a sus propiedades
-    // Cuando se ejecuta fetch y se obtiene el gato, se actualiza el estado del gato con los datos obtenidos
-    if (!gato) {
-        return <p>Cargando gato...</p>;
-    }
-
     // Metodo para MODIFICAR un gato    
-    // Al editar la ficha, se copian los valores del gato a los campos de edición
     // De momento estamos realizando pruebas en Postman, por lo que no se guardan los cambios en la API
     const putGato = () => {
-        // Se envuçia una solicitud PUT a la API para actualizar la información del gato
-         fetch(`https://30f6ed45-fb84-480e-8cb7-5dc79fe76a6d.mock.pstmn.io/Gatos/${gato.id}`, {
-            method: 'PUT', // Método PUT para actualizar el gato
-            headers: {
-                'Content-Type': 'application/json', // Especifica que el cuerpo se envia como JSON
-            },
-            body: JSON.stringify({ // stringify convierte el objeto Typescript a JSON y contiene los campos editados
-                nombreEditado,
-                razaEditada, 
-                sexoEditado, 
-                fechaNacimientoEditada, 
-                chipEditado, 
-                vacunadoEditado, 
-                esterilizadoEditado, 
-                pesoEditado, 
-                personalidadEditada, 
-                disponibilidadEditada, 
-                historiaEditada, 
-                descripcionEditada})
+        if (!gato) { // Si no hay gato, no se puede editar
+            return;
+        } 
+        // Se envia una solicitud PUT a la API para actualizar la información del gato
+        fetch(`https://30f6ed45-fb84-480e-8cb7-5dc79fe76a6d.mock.pstmn.io/Gatos/${gato.id}`, {
+        method: 'PUT', // Método PUT para actualizar el gato
+        headers: {
+            'Content-Type': 'application/json', // Especifica que el cuerpo se envia como JSON
+        },
+        body: JSON.stringify({ // stringify convierte el objeto Typescript a JSON y contiene los campos editados
+            nombreEditado,
+            razaEditada, 
+            sexoEditado, 
+            fechaNacimientoEditada, 
+            chipEditado, 
+            vacunadoEditado, 
+            esterilizadoEditado, 
+            pesoEditado, 
+            personalidadEditada, 
+            disponibilidadEditada, 
+            historiaEditada, 
+            descripcionEditada})
         })
         .then((res) => res.json())
         .then((data) => {
@@ -91,28 +76,91 @@ const Gato = () => {
         }); 
     };
 
+    // Metodo para INSERTAR un gato nuevo
+    const postGato = () => {
+        // Se envía una solicitud POST a la API para crear un nuevo gato
+        fetch('https://30f6ed45-fb84-480e-8cb7-5dc79fe76a6d.mock.pstmn.io/Gatos', {
+            method: 'POST', // Usar POST para agregar un nuevo gato
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+                nombre: nombreEditado,
+                raza: razaEditada,
+                sexo: sexoEditado,
+                fechaNacimiento: fechaNacimientoEditada,
+                chip: chipEditado,
+                vacunado: vacunadoEditado,
+                esterilizado: esterilizadoEditado,
+                peso: pesoEditado,
+                personalidad: personalidadEditada,
+                disponibilidad: disponibilidadEditada,
+                historia: historiaEditada,
+                descripcion: descripcionEditada
+            })
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            console.log('Gato insertado:', data);
+            alert('Gato insertado con éxito');
+        })
+        .catch((err) => {
+            console.error('Error al insertar el gato:', err);
+            alert('Error al insertar el gato');
+        });
+    };
+
+
+    // Obtener el gato desde la API al cargar el componente (Azure Storage)
+    // useEffect se ejecuta una vez al cargar el componente y cada vez que cambia el id del gato
+    // fetch se utiliza para hacer una solicitud HTTP a la API y obtener los datos del gato
+    // then se utiliza para manejar la respuesta de la API y convertirla a JSON como un objeto de TypeScript
+    // catch se utiliza para manejar cualquier error que ocurra durante la solicitud
+    // Si el modo no es insertar, hace fetch para trear a los gatos
+    useEffect(() => {
+        if (modo !== "insertar") {
+            fetch(`https://storagegatosunidos.blob.core.windows.net/datos/gato_${id}`)
+            .then((response) => response.json())
+            .then((data) => setGato(data))
+            .catch((error) => console.error('Error al obtener el gato', error));
+        } 
+    }, [modo, id]); // id solo se ejecuta si cambia el id del gato (es el segundo argumento de useEffect)
+
     return (
         <div className="content">
-            <div className="contenedorGato">
-                {!editarGato ? (
-                    <>
-                    <div className="fichaGato"> {/* Si el usuario no está editando la ficha, se muestra la información del gato */}
-                        <h2>📋 Mi ficha</h2>
+            {modo ==="lectura" && gato &&(
+                <>
+                <div className="contenedorGato">
+                    <div className="fichaGato"> {/* Si el usuario solo esta viendo la ficha */}
+                        <div className="atributos">       
+                            <span className="nombre">😺 Nombre:</span> {gato.nombre}     
+                        </div>
+                        <div className="atributos">       
+                            <span className="raza">🧬 Raza:</span> {gato.raza}     
+                        </div>
                         <div className="atributos">
-                            <span className="nombre">🐱 Nombre:</span> {gato.nombre}
-                            <span className="raza">🧬 Raza:</span> {gato.raza}
-                            <span className="fechaDeNacimiento">📅 Fecha de Nacimiento:</span>{gato.fechaNacimiento}     
+                            <span className="fechaDeNacimiento">📅 Fecha de Nacimiento:</span>{gato.fechaNacimiento}
                         </div>
                         <div className="atributos">
                             <span className="sexo">{gato.sexo === "Macho" ? "🚹" : "🚺"} Sexo:</span> {gato.sexo}
-                            <span className="personalidad">🤗 Perosnalidad:</span> {gato.personalidad}
-                            <span className="peso">⚖️ Peso:</span> {gato.peso}
+                        </div>
+                        <div className="atributos">
+                            <span className="personalidad">🤗 Perosnalidad:</span> {gato.personalidad.join(", ")}
+                        </div>
+                        <div className="atributos">
+                            <span className="peso">⚖️ Peso:</span> {gato.peso} KG
                         </div>
                         <div className="atributos">
                             <span className="chip">⚙️ Chip:</span> {gato.chip ? "Sí" : "No"}
-                            <span className="vacunado">💉 Vacunado:</span> {gato.vacunado ? "Sí" : "No"}
+                        </div>
+                        <div className="atributos">
+                        <span className="vacunado">💉 Vacunado:</span> {gato.vacunado ? "Sí" : "No"}
+                        </div>
+                        <div className="atributos">
                             <span className="esterilizado">🐾 Esterilizado:</span> {gato.esterilizado ? "Sí" : "No"}
-                            <span className="disponibilidad">📅 Disponibilidad:</span> {gato.disponibilidad}
+                        </div>
+                        <div className="atributos">
+                            <span className="disponibilidad">📅 Disponibilidad:</span> {gato.disponibilidad.join(", ")}
                         </div>
                         <div className="atributos">
                             <span className="historia">📜 Historia:</span> {gato.historia}
@@ -120,7 +168,6 @@ const Gato = () => {
                         <div className="atributos">
                             <span className="descripcion">Descripción:</span> {gato.descripcion}
                         </div>
-                        <button className="editarFicha" onClick={() => setEditarGato(true)}>✏️ Editar</button>
                     </div>
                     <div className="gato" key={gato.id}>
                         <img src={gato.foto} alt={gato.nombre} className="fotoGato" />
@@ -130,10 +177,15 @@ const Gato = () => {
                         <img src={gato.foto} alt={gato.nombre} className="fotoGato" />
                         <img src={gato.foto} alt={gato.nombre} className="fotoGato" />
                     </div>
-                </>     
-                    ) : (
-                    <div className="fichaGato"> {/* Si el usuario está editando la ficha, se muestra un formulario para editar la información del gato */}
-                        <h2>📋 Editado Ficha de {gato.nombre}</h2>
+                </div>
+            </>
+            )}
+
+            {modo ==="editar" && gato &&(
+                <>
+                <div className="contenedorGatoEditar">
+                    <p className="tituloGato">📋 Editar Ficha de {gato.nombre}</p>
+                    <div className="fichaGato"> {/* Si el usuario está editando la ficha */}
                         <div className="atributos">
                             <span className="nombre">🐱 Nombre:</span>
                             <input                             
@@ -142,6 +194,8 @@ const Gato = () => {
                                 value={nombreEditado}
                                 onChange={(e) => setNombreEditado(e.target.value)}
                             />
+                        </div>
+                        <div className="atributos">
                             <span className="raza">🧬 Raza:</span>
                             <input
                                 type="text"
@@ -149,6 +203,8 @@ const Gato = () => {
                                 value={razaEditada}
                                 onChange={(e) => setRazaEditada(e.target.value)}
                             />
+                        </div>
+                        <div className="atributos">
                             <span className="fechaDeNacimiento">📅 Fecha de Nacimiento:</span>
                             <input
                                 type="date"
@@ -165,6 +221,8 @@ const Gato = () => {
                                 value={sexoEditado}
                                 onChange={(e) => setSexoEditado(e.target.value)}
                             />     
+                        </div>
+                        <div className="atributos">
                             <span className="personalidad">🤗 Perosnalidad:</span>
                             <input
                                 type="text"
@@ -172,6 +230,8 @@ const Gato = () => {
                                 value={personalidadEditada}
                                 onChange={(e) => setPersonalidadEditada(e.target.value.split(','))}
                             />
+                        </div>
+                        <div className="atributos">
                             <span className="disponibilidad">📅 Disponibilidad:</span>
                             <input
                                 type="text"
@@ -181,31 +241,37 @@ const Gato = () => {
                             />
                         </div>
                         <div className="atributos">
-                        <span className="chip">⚙️ Chip:</span>
+                            <span className="chip">⚙️ Chip:</span>
                             <input
                                 type="checkbox"
                                 checked={chipEditado}
                                 onChange={(e) => setChipEditado(e.target.checked)}
                             />
+                        </div>
+                        <div className="atributos">
                             <span className="vacunado">💉 Vacunado:</span>
                             <input
                                 type="checkbox"
                                 checked={vacunadoEditado}
                                 onChange={(e) => setVacunadoEditado(e.target.checked)}
                             />
+                        </div>
+                        <div className="atributos">
                             <span className="esterilizado">🐾 Esterilizado:</span>
                             <input
                                 type="checkbox"
                                 checked={esterilizadoEditado}
                                 onChange={(e) => setEsterilizadoEditado(e.target.checked)}
                             />
+                        </div>
+                        <div className="atributos">
                             <span className="peso">⚖️ Peso:</span>
                             <input
                                 type="number"
                                 className="input"
                                 value={pesoEditado}
                                 onChange={(e) => setPesoEditado(parseFloat(e.target.value))}
-                            />
+                            />  
                         </div>
                         <div className="atributos">
                             <span className="historia">📜 Historia:</span>
@@ -225,10 +291,151 @@ const Gato = () => {
                                 onChange={(e) => setDescripcionEditada(e.target.value)}
                             />
                         </div>
-                        <button className="guardarFicha" onClick={putGato}>✏️ Guardar ficha</button>
                     </div>
-                )}
-            </div>
+                    <button className="botonEditarGato" onClick={putGato}>✏️ Guardar</button>
+                </div>
+                </>
+            )}  
+
+            {modo ==="insertar" && (
+                <>
+                <div className="contenedorGatoInsertar">
+                    <p className="tituloGato">📋 Insertando un gato nuevo</p>
+                    <div className="fichaGato"> {/* Si el usuario insertando un gato nuevo */}
+                        <div className="atributos">
+                            <span className="nombre">🐱 Nombre:</span>
+                            <input                             
+                                type="text"
+                                className="input"
+                                value={nombreEditado}
+                                onChange={(e) => setNombreEditado(e.target.value)}
+                            />
+                        </div>
+                        <div className="atributos">
+                            <span className="raza">🧬 Raza:</span>
+                            <input
+                                type="text"
+                                className="input"
+                                value={razaEditada}
+                                onChange={(e) => setRazaEditada(e.target.value)}
+                            />
+                        </div>
+                        <div className="atributos">
+                            <span className="fechaDeNacimiento">📅 Fecha de Nacimiento:</span>
+                            <input
+                                type="date"
+                                className="input"
+                                value={fechaNacimientoEditada}
+                                onChange={(e) => setFechaNacimientoEditada(e.target.value)}
+                            />   
+                        </div>
+                        <div className="atributos">
+                            <span className="sexo">Sexo:</span>
+                            <input
+                                type="text"
+                                className="input"
+                                value={sexoEditado}
+                                onChange={(e) => setSexoEditado(e.target.value)}
+                            />     
+                        </div>
+                        <div className="atributos">
+                            <span className="personalidad">🤗 Perosnalidad:</span>
+                            <input
+                                type="text"
+                                className="input"
+                                value={personalidadEditada}
+                                onChange={(e) => setPersonalidadEditada(e.target.value.split(','))}
+                            />
+                        </div>
+                        <div className="atributos">
+                            <span className="disponibilidad">📅 Disponibilidad:</span>
+                            <input
+                                type="text"
+                                className="input"
+                                value={disponibilidadEditada}
+                                onChange={(e) => setDisponibilidadEditada(e.target.value.split(','))}
+                            />
+                        </div>
+                        <div className="atributos">
+                            <span className="chip">⚙️ Chip:</span>
+                            <input
+                                type="checkbox"
+                                checked={chipEditado}
+                                onChange={(e) => setChipEditado(e.target.checked)}
+                            />
+                        </div>
+                        <div className="atributos">
+                            <span className="vacunado">💉 Vacunado:</span>
+                            <input
+                                type="checkbox"
+                                checked={vacunadoEditado}
+                                onChange={(e) => setVacunadoEditado(e.target.checked)}
+                            />
+                        </div>
+                        <div className="atributos">
+                            <span className="esterilizado">🐾 Esterilizado:</span>
+                            <input
+                                type="checkbox"
+                                checked={esterilizadoEditado}
+                                onChange={(e) => setEsterilizadoEditado(e.target.checked)}
+                            />
+                        </div>
+                        <div className="atributos">
+                            <span className="peso">⚖️ Peso:</span>
+                            <input
+                                type="number"
+                                className="input"
+                                value={pesoEditado}
+                                onChange={(e) => setPesoEditado(parseFloat(e.target.value))}
+                            />  
+                        </div>
+                        <div className="atributos">
+                            <span className="historia">📜 Historia:</span>
+                            <input
+                                type="text"
+                                className="inputHistoriayDescripcion"
+                                value={historiaEditada}
+                                onChange={(e) => setHistoriaEditada(e.target.value)}
+                            />
+                        </div>
+                        <div className="atributos">
+                            <span className="descripcion">Descripción:</span>
+                            <input
+                                type="text"
+                                className="inputHistoriayDescripcion"
+                                value={descripcionEditada}
+                                onChange={(e) => setDescripcionEditada(e.target.value)}
+                            />
+                        </div>
+                    </div>
+                    <button className="botonInsertarGato" onClick={postGato}>✏️ Crear</button>
+                </div>
+                </>
+            )}
+
+            {modo ==="eliminar" && gato &&(
+                <>
+                <div className="contenedorGatoEliminar">
+                    <p className="tituloGato">📋 MENU ELIMINAR GATO</p>
+                    <div className="fichaGato"> {/* Si el usuario insertando un gato nuevo */}
+                        <div className="atributos">
+                            <span className="id">🐱 ID:</span> {gato.id}
+                            <span className="nombre">🐱 Nombre:</span> {gato.nombre}
+                        </div>
+                        <div className="gato" key={gato.id}>
+                        <img src={gato.foto} alt={gato.nombre} className="fotoGato" />
+                    </div>
+                    </div>
+                    <button className="botonEliminarGato" onClick={() => {
+                        if (window.confirm("¿Estás seguro de que quieres eliminar este gato?")) {
+                        alert("Eliminando gato...");
+                            // Aqui poner el codigo para enviar delelte a azure
+                        }
+                    }}> ❌ Eliminar
+                    </button>
+                </div>
+                </>
+            )}
         </div>
     );
 };
