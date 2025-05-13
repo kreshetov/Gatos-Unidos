@@ -7,7 +7,6 @@
 
 .informacionColabora {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   font-size: 16px;
   color: #1e4050;
@@ -60,4 +59,50 @@
   background-color: red;
   color: white;
   cursor: pointer;
+}
+
+.botonPaypal {
+  background-color: #ffc439; /* color amarillo PayPal */
+  border: none;
+  color: #034286;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #b38f00;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-block;
+  font-family: sans-serif;
+}
+
+.botonPaypal:hover {
+  background-color: #ffb347;
+  color: #0154ae;
+  box-shadow: 0 2px 0 #b38f00;
+  transform: translateY(1px);
+}
+
+.botonClinicas {
+  background-color: #034286;
+  border: none;
+  color: #ffc439;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #b38f00;
+  transition: all 0.2s ease;
+}
+
+
+
+
+.botonClinicas:hover {
+  background-color: #0154ae;
+  color: #ffb347;
+  box-shadow: 0 2px 0 #b38f00;
+  transform: translateY(1px);
 }

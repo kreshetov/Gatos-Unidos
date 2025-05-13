@@ -20,7 +20,7 @@ const Colaborate = () => {
                     <div className="colaboracion">
                         <p className="encabezadoColabora">🐾 Vínculo directo con un gato</p>
                         <p className="tipoColaboracion">
-                            (adopción, acogida temporal, apadrinamiento)
+                            (adopción, acogida, apadrinamiento)
                         </p>
                         <p className="texto">
                             Cambia su vida y la tuya. Adopta, acoge por un tiempo o apadrina a un gato para ser parte activa de su historia.
@@ -33,7 +33,7 @@ const Colaborate = () => {
                             (gato perdido, herido, abandonado)
                         </p>
                         <p className="texto">
-                        Tú puedes marcar la diferencia. Si ves un gato que necesita ayuda, cuéntanos. Nuestro equipo intentará actuar lo antes posible para rescatarlo y darle la atención que necesita.
+                            Si ves un gato que necesita ayuda, cuéntanos. Nuestro equipo intentará actuar lo antes posible para rescatarlo y darle la atención que necesita.
                         </p>
                         <Link to="/Reportar"><button className="boton">¡Quiero reportar un caso!</button></Link>
                     </div>
