@@ -17,7 +17,6 @@ const NavBar = () => {
                     </ul>
                 </li>
                 <li> <Link to="ContactUs"> Contacto </Link> </li>
-                <li> <Link to="PersonalArea"> Area personal </Link> </li>
             </ul>
         </nav>
     );
