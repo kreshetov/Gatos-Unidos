@@ -26,6 +26,7 @@ import './css/Gatos.css';
 import './css/NavBar.css';
 import './css/style.css';
 import './css/Adoptar.css';
+import './css/Donar.css';
 
 function App() {
   return (

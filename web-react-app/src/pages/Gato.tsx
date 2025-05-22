@@ -132,40 +132,40 @@ const Gato = () => {
                 <>
                 <div className="contenedorGato">
                     <div className="fichaGato"> {/* Si el usuario solo esta viendo la ficha */}
-                        <div className="atributos">       
+                        <div className="atributosGato">       
                             <span className="nombre">😺 Nombre:</span> {gato.nombre}     
                         </div>
-                        <div className="atributos">       
+                        <div className="atributosGato">       
                             <span className="raza">🧬 Raza:</span> {gato.raza}     
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="fechaDeNacimiento">📅 Fecha de Nacimiento:</span>{gato.fechaNacimiento}
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="sexo">{gato.sexo === "Macho" ? "🚹" : "🚺"} Sexo:</span> {gato.sexo}
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="personalidad">🤗 Perosnalidad:</span> {gato.personalidad.join(", ")}
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="peso">⚖️ Peso:</span> {gato.peso} KG
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="chip">⚙️ Chip:</span> {gato.chip ? "Sí" : "No"}
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                         <span className="vacunado">💉 Vacunado:</span> {gato.vacunado ? "Sí" : "No"}
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="esterilizado">🐾 Esterilizado:</span> {gato.esterilizado ? "Sí" : "No"}
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="disponibilidad">📅 Disponibilidad:</span> {gato.disponibilidad.join(", ")}
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="historia">📜 Historia:</span> {gato.historia}
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="descripcion">Descripción:</span> {gato.descripcion}
                         </div>
                     </div>
@@ -186,7 +186,7 @@ const Gato = () => {
                 <div className="contenedorGatoEditar">
                     <p className="tituloGato">📋 Editar Ficha de {gato.nombre}</p>
                     <div className="fichaGato"> {/* Si el usuario está editando la ficha */}
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="nombre">🐱 Nombre:</span>
                             <input                             
                                 type="text"
@@ -195,7 +195,7 @@ const Gato = () => {
                                 onChange={(e) => setNombreEditado(e.target.value)}
                             />
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="raza">🧬 Raza:</span>
                             <input
                                 type="text"
@@ -204,7 +204,7 @@ const Gato = () => {
                                 onChange={(e) => setRazaEditada(e.target.value)}
                             />
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="fechaDeNacimiento">📅 Fecha de Nacimiento:</span>
                             <input
                                 type="date"
@@ -213,7 +213,7 @@ const Gato = () => {
                                 onChange={(e) => setFechaNacimientoEditada(e.target.value)}
                             />   
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="sexo">{gato.sexo === "Macho" ? "🚹" : "🚺"} Sexo:</span>
                             <input
                                 type="text"
@@ -222,7 +222,7 @@ const Gato = () => {
                                 onChange={(e) => setSexoEditado(e.target.value)}
                             />     
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="personalidad">🤗 Perosnalidad:</span>
                             <input
                                 type="text"
@@ -231,7 +231,7 @@ const Gato = () => {
                                 onChange={(e) => setPersonalidadEditada(e.target.value.split(','))}
                             />
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="disponibilidad">📅 Disponibilidad:</span>
                             <input
                                 type="text"
@@ -240,7 +240,7 @@ const Gato = () => {
                                 onChange={(e) => setDisponibilidadEditada(e.target.value.split(','))}
                             />
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="chip">⚙️ Chip:</span>
                             <input
                                 type="checkbox"
@@ -248,7 +248,7 @@ const Gato = () => {
                                 onChange={(e) => setChipEditado(e.target.checked)}
                             />
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="vacunado">💉 Vacunado:</span>
                             <input
                                 type="checkbox"
@@ -256,7 +256,7 @@ const Gato = () => {
                                 onChange={(e) => setVacunadoEditado(e.target.checked)}
                             />
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="esterilizado">🐾 Esterilizado:</span>
                             <input
                                 type="checkbox"
@@ -264,7 +264,7 @@ const Gato = () => {
                                 onChange={(e) => setEsterilizadoEditado(e.target.checked)}
                             />
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="peso">⚖️ Peso:</span>
                             <input
                                 type="number"
@@ -273,7 +273,7 @@ const Gato = () => {
                                 onChange={(e) => setPesoEditado(parseFloat(e.target.value))}
                             />  
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="historia">📜 Historia:</span>
                             <input
                                 type="text"
@@ -282,7 +282,7 @@ const Gato = () => {
                                 onChange={(e) => setHistoriaEditada(e.target.value)}
                             />
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="descripcion">Descripción:</span>
                             <input
                                 type="text"
@@ -302,7 +302,7 @@ const Gato = () => {
                 <div className="contenedorGatoInsertar">
                     <p className="tituloGato">📋 Insertando un gato nuevo</p>
                     <div className="fichaGato"> {/* Si el usuario insertando un gato nuevo */}
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="nombre">🐱 Nombre:</span>
                             <input                             
                                 type="text"
@@ -311,7 +311,7 @@ const Gato = () => {
                                 onChange={(e) => setNombreEditado(e.target.value)}
                             />
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="raza">🧬 Raza:</span>
                             <input
                                 type="text"
@@ -320,7 +320,7 @@ const Gato = () => {
                                 onChange={(e) => setRazaEditada(e.target.value)}
                             />
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="fechaDeNacimiento">📅 Fecha de Nacimiento:</span>
                             <input
                                 type="date"
@@ -329,7 +329,7 @@ const Gato = () => {
                                 onChange={(e) => setFechaNacimientoEditada(e.target.value)}
                             />   
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="sexo">Sexo:</span>
                             <input
                                 type="text"
@@ -338,7 +338,7 @@ const Gato = () => {
                                 onChange={(e) => setSexoEditado(e.target.value)}
                             />     
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="personalidad">🤗 Perosnalidad:</span>
                             <input
                                 type="text"
@@ -347,7 +347,7 @@ const Gato = () => {
                                 onChange={(e) => setPersonalidadEditada(e.target.value.split(','))}
                             />
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="disponibilidad">📅 Disponibilidad:</span>
                             <input
                                 type="text"
@@ -356,7 +356,7 @@ const Gato = () => {
                                 onChange={(e) => setDisponibilidadEditada(e.target.value.split(','))}
                             />
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="chip">⚙️ Chip:</span>
                             <input
                                 type="checkbox"
@@ -364,7 +364,7 @@ const Gato = () => {
                                 onChange={(e) => setChipEditado(e.target.checked)}
                             />
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="vacunado">💉 Vacunado:</span>
                             <input
                                 type="checkbox"
@@ -372,7 +372,7 @@ const Gato = () => {
                                 onChange={(e) => setVacunadoEditado(e.target.checked)}
                             />
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="esterilizado">🐾 Esterilizado:</span>
                             <input
                                 type="checkbox"
@@ -380,7 +380,7 @@ const Gato = () => {
                                 onChange={(e) => setEsterilizadoEditado(e.target.checked)}
                             />
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="peso">⚖️ Peso:</span>
                             <input
                                 type="number"
@@ -389,7 +389,7 @@ const Gato = () => {
                                 onChange={(e) => setPesoEditado(parseFloat(e.target.value))}
                             />  
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="historia">📜 Historia:</span>
                             <input
                                 type="text"
@@ -398,7 +398,7 @@ const Gato = () => {
                                 onChange={(e) => setHistoriaEditada(e.target.value)}
                             />
                         </div>
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="descripcion">Descripción:</span>
                             <input
                                 type="text"
@@ -418,7 +418,7 @@ const Gato = () => {
                 <div className="contenedorGatoEliminar">
                     <p className="tituloGato">📋 MENU ELIMINAR GATO</p>
                     <div className="fichaGato"> {/* Si el usuario insertando un gato nuevo */}
-                        <div className="atributos">
+                        <div className="atributosGato">
                             <span className="id">🐱 ID:</span> {gato.id}
                             <span className="nombre">🐱 Nombre:</span> {gato.nombre}
                         </div>

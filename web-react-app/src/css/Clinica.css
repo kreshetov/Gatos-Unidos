@@ -1,30 +1,187 @@
-.informacionClinica {
-    width: 80%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .clinica {
-    display: flex;
-    align-items: center; /* Centra verticalmente la imagen y la información */
-    gap: 20px; /* Espacio entre la imagen y la información */
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 100%;
-    background-color: #f4f4f4;
-  }
-  
-  .clinica img {
-    border-radius: 10px;
-    width: 300px;
-    height: 200px;
-  }
-  
-  .clinica h3 {
-    font-size: 2rem;
-    margin-bottom: 10px;
-  }
+.contenedorClinica {
+  margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.fichaClinica {
+  margin: -10px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
+  height: auto;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  display: flex;
+  justify-content: left;
+  border-radius: 10px;
+}
+
+.fichaClinica h2 {
+  font-size: 24px;
+  margin-bottom: 12px;
+  color: #1e4050;
+}
+
+.fichaClinica p {
+  margin: 3px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.nombre_imagen_mapa_Clinica {
+  width: 50%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+}
+
+.clinicaNombre {
+  font-family: Arial, sans-serif;
+  font-size: 40px;
+  font-weight: bold;
+  color: #1e4050;
+  padding: 5px;
+  margin: 0;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  border: 2px solid white;
+}
+
+.nombre_imagen_mapa_Clinica img {
+  width: 80%;
+  border-radius: 12px;
+}
+
+.clinicaUbicacion {
+  font-family: Arial, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: #1e4050;
+  margin: 0;
+  margin-top: 10px;
+  border: 2px solid white;
+}
+
+.mapa-ubicacion {
+  border: 0;
+  border-radius: 10px;
+  width: 80%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.especialidad {
+  display: inline-block;
+  background: #6a11cb;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: white;
+  padding: 10px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.descripcion {
+  background: linear-gradient(135deg, #00c9ff, #92fe9d);
+  color: #002b36;
+  padding: 10px 10px; /* más ajustado verticalmente */
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.direccion {
+  display: inline-block;
+  background: linear-gradient(135deg, #f953c6, #b91d73);
+  color: white;
+  padding: 10px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.telefono {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff5f6d, #ffc371);
+  color: white;
+  padding: 10px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.email {
+  display: inline-block;
+  background: linear-gradient(135deg, #00b09b, #96c93d);
+  color: white;
+  padding: 10px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.web {
+  display: inline-block;
+  background: linear-gradient(135deg, #ee9ca7, #ffdde1);
+  color: #333;
+  padding: 10px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.horario {
+  display: inline-block;
+  background: linear-gradient(135deg, #2193b0, #6dd5ed);
+  color: white;
+  padding: 10px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.servicios {
+  display: inline-block;
+  background: linear-gradient(135deg, #c6ffdd, #fbd786, #f7797d);
+  color: #333;
+  padding: 10px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.ubicacion {
+  display: inline-block;
+  background: linear-gradient(135deg, #56ab2f, #a8e063);
+  color: white;
+  padding: 10px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.valoracion {
+  display: inline-block;
+  background: linear-gradient(135deg, #e96443, #904e95);
+  color: white;
+  padding: 10px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.reseñas {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  color: white;
+  padding: 10px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.atributosClinica {
+  align-items: center;
+  font-size: 17px;
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  margin-right: 10px;
+}
