@@ -37,8 +37,9 @@ const Clinics = () => {
                             </div>
                             <div className="informacionClinica">
                                 <p className="nombreClinica">{clinica.nombre}</p>
-                                <p className="atributoClinica">⭐{clinica.especialidad}</p>
-                                <p className="atributoClinica">📍{clinica.direccion}</p>
+                                <p className="atributoClinicas">⭐{clinica.especialidad}</p>
+                                <p className="atributoClinicas">📍{clinica.direccion}</p>
+                                <p className="atributoClinicas">📝{clinica.descripcion}</p>
                             </div>
                         </div>
                     ))}

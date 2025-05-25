@@ -27,6 +27,9 @@ import './css/NavBar.css';
 import './css/style.css';
 import './css/Adoptar.css';
 import './css/Donar.css';
+import './css/EditarGato.css';
+import './css/EliminarGato.css';
+import './css/InsertarGato.css';
 
 function App() {
   return (

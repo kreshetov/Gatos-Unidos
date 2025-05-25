@@ -1,6 +1,6 @@
 .tituloClinicas {
   text-align: center;
-  font-size: 24px;
+  font-size: 34px;
   font-weight: bold;
   color: #1e4050;
 }
@@ -10,11 +10,13 @@
   gap: 20px;
   justify-content: center;
   padding-bottom: 10px;
+  margin-bottom: 20px;
 }
   
 .clinicas{
   color: black;
   width: 350px;
+  height: auto;
   border-radius: 10px;
   text-align: center;
   margin: 0;
@@ -22,16 +24,6 @@
   border: 1px solid black;
   gap: 0;
   cursor: pointer;
-}
-
-.clinicasFoto {
-  width: 350px;
-  height: 200px;
-}
-
-.clinicas:hover {
-  box-shadow: 0 0 20px #1e4050;
-  transition: box-shadow 0.3s ease;
 }
 
 .clinicas img {
@@ -43,10 +35,20 @@
   box-shadow: 0 0 20px #1e4050;
 }
 
+.clinicas:hover {
+  box-shadow: 0 0 20px #1e4050;
+  transition: box-shadow 0.3s ease;
+}
+
+.clinicasFoto {
+  width: 350px;
+  height: 200px;
+}
+
 .informacionClinica {
   display: flex;
   width: 350px;
-  height: 100px;
+  height: auto;
   flex-direction: column;
   justify-content: flex-start; /* Asegura que los elementos estén alineados al principio */
   gap: 0px; /* Controla la separación entre los elementos */
@@ -74,9 +76,9 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.atributoClinica {
+.atributoClinicas {
   font-family: Arial, sans-serif;
-  padding: 2px;
+  padding: 3px 15px;
   font-size: 16px;
   color: #1e4050;
   margin-top: -10px;

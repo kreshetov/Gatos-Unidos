@@ -14,7 +14,7 @@ interface interfazClinica {
     web: string;
     horario: { [key: string]: string };
     servicios: { [key: string]: string };
-    ubicacion: { lat: number, lng: number };
+    ubicacion: { lat: number, lng: number }; // no lo uso
     valoracion: number;
     reseñas: number;
 }
@@ -52,49 +52,26 @@ const Clinica = () => {
                         ></iframe>
                     </div>
                     <div className="fichaClinica">
-                        <div className="atributosClinica">
-                            <span className="especialidad">Especialidad: </span> {clinica.especialidad}
-                        </div>
-                        <div className="atributosClinica">
-                            <span className="descripcion">Descripcion: </span> {clinica.descripcion}
-                        </div>
-                        <div className="atributosClinica">
-                            <span className="direccion">Dirección: </span> {clinica.direccion}
-                        </div>
-                        <div className="atributosClinica">
-                            <span className="telefono">Teléfono: </span> {clinica.telefono}
-                        </div>
-                        <div className="atributosClinica">
-                            <span className="email">Email: </span> {clinica.email}
-                        </div>
-                        <div className="atributosClinica">
-                            <span className="web">Web: </span> {clinica.web}
-                        </div>
-                        <div className="atributosClinica">
-                            <span className="horario">Horario: </span> 
-                            <ul>
+                            <span className="atributoClinica">Especialidad</span> <p className="textoClinica">{clinica.especialidad}</p>
+                            <span className="atributoClinica">Descripcion</span> <p className="textoClinica">{clinica.descripcion}</p>
+                            <span className="atributoClinica">Dirección</span> <p className="textoClinica">{clinica.direccion}</p>
+                            <span className="atributoClinica">Teléfono</span> <p className="textoClinica">{clinica.telefono}</p>
+                            <span className="atributoClinica">Email</span> <p className="textoClinica">{clinica.email}</p>
+                            <span className="atributoClinica">Web</span> <p className="textoClinica">{clinica.web}</p>
+                            <span className="atributoClinica">Horario</span>
+                            <ul className="lista-horario">
                                 {Object.entries(clinica.horario).map(([dia, horas]) => (
                                 <li key={dia}>{dia}: {horas}</li>
                                 ))}
                             </ul>
-                        </div>
-                        <div className="atributosClinica">
-                            <span className="servicios">Servicios: </span> 
-                            <ul>
+                            <span className="atributoClinica">Servicios</span> 
+                            <ul className="lista-servicios">
                                 {Object.values(clinica.servicios).map((servicio, index) => (
                                 <li key={index}>{servicio}</li>
                                 ))}
-                            </ul>
-                        </div>
-                        <div className="atributosClinica">
-                            <span className="ubicacion">Ubicacion: </span> Lat: {clinica.ubicacion.lat}, Lng: {clinica.ubicacion.lng}
-                        </div>
-                        <div className="atributosClinica">
-                            <span className="valoracion">Valoración: </span> {clinica.valoracion}
-                        </div>
-                        <div className="atributosClinica">
-                            <span className="reseñas">Reseñas: </span> {clinica.reseñas}
-                        </div>
+                            </ul>  
+                            <span className="atributoClinica">Valoración</span> <p className="textoClinica">{clinica.valoracion}</p>
+                            <span className="atributoClinica">Reseñas</span> <p className="textoClinica">{clinica.reseñas}</p>
                     </div>
                 </div>
             </div>
