@@ -2,7 +2,7 @@
   "profiles": {
     "GatosFunctionApp": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7008",
+      "commandLineArgs": "--port 7177",
       "launchBrowser": false
     }
   }

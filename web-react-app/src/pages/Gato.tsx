@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // Estructura de datos del gato ----------------------------------------------------------------------------------------------------------------------------------------------------
 interface InterfazGato {
@@ -21,12 +22,14 @@ interface InterfazGato {
 
 // Componente Gato  ----------------------------------------------------------------------------------------------------------------------------------------------------------------
 const Gato = () => {
+    const navigate = useNavigate(); // Hook para navegar entre rutas (para redirigir a la lista de Gatos despues de editar, insertar o eliminar)
     const [gato, setGato] = useState<InterfazGato | null>(null); // Estado para almacenar los datos del gato
     const [searchParams] = useSearchParams(); // Obtiene los parametros de buslqueda de la URL
     const modo = searchParams.get('modo'); // Obtiene el modo de la URL (lectura, editar, crear, eliminar)
     const { id } = useParams<{ id: string }>(); // Obtiene el id del gato desde la URL
     
     // Estados para editar/insertar gato -------------------------------------------------------------------------------------------------------------------------------------------
+    const [idEdit, setIdEdit] = useState<string>(id || '');
     const [nombreEdit, setNombreEdit] = useState<string>('');
     const [razaEdit, setRazaEdit] = useState<string>('');
     const [fechaNacimientoEdit, setFechaNacimientoEdit] = useState<string>('');
@@ -71,82 +74,123 @@ const Gato = () => {
     }, [modo, gato]);
 
     // Metodos ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
     // 1 Editar gato existente  
-    // De momento estamos realizando pruebas en Postman, por lo que no se guardan los cambios en la API
     const putGato = () => {
         if (!gato) { // Si no hay gato, no se puede editar
             return;
         } 
         // Se envia una solicitud PUT a la API para actualizar la información del gato
-        fetch(`https://30f6ed45-fb84-480e-8cb7-5dc79fe76a6d.mock.pstmn.io/Gatos/${gato.id}`, {
-        method: 'PUT', // Método PUT para actualizar el gato
-        headers: {
-            'Content-Type': 'application/json', // Especifica que el cuerpo se envia como JSON
-        },
-        body: JSON.stringify({ // stringify convierte el objeto Typescript a JSON y contiene los campos editados
-            id: gato.id,
-            nombre: nombreEdit,
-            raza: razaEdit, 
-            fechaNacimientoEdit,
-            sexo: sexoEdit, 
-            personalidad: personalidadEdit, 
-            peso: pesoEdit, 
-            chip: chipEdit, 
-            vacinaod: vacunadoEdit, 
-            esterilizado: esterilizadoEdit, 
-            disponibilidad: disponibilidadEdit, 
-            historia: historiaEdit, 
-            descripcion: descripcionEdit})
+        fetch('https://funcionesgato.azurewebsites.net/api/EditarGato', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                id: gato.id,
+                nombre: nombreEdit,
+                raza: razaEdit,
+                fechaNacimiento: fechaNacimientoEdit,
+                sexo: sexoEdit,
+                personalidad: personalidadEdit,
+                peso: pesoEdit,
+                chip: chipEdit,
+                vacunado: vacunadoEdit,
+                esterilizado: esterilizadoEdit,
+                disponibilidad: disponibilidadEdit,
+                historia: historiaEdit,
+                foto: gato.foto,
+                descripcion: descripcionEdit
+            })
         })
-        .then((res) => res.json())
-        .then((data) => {
-            console.log('Gato actualizado:', data); // Prueba de que se ha actualizado el gato
-            alert('Ficha guardada con éxito (simulado)'); // Mensaje de éxito al guardar la ficha
+        .then(res => res.text())
+        .then(data => {
+            console.log('Gato actualizado:', data);
+            alert('Ficha guardada con éxito');
+            navigate('/Gatos');
         })
-        .catch((err) => {
-            console.error('Error al guardar la ficha:', err); // Manejo de errores al guardar la ficha
-            alert('Error al guardar la ficha'); // Mensaje de error al guardar la ficha
-        }); 
+        .catch(err => {
+            console.error('Error al guardar la ficha:', err);
+            alert('Error al guardar la ficha');
+        });
     };
-
 
 
     // 2 Insertar gato nuevo
     const postGato = () => {
         // Se envía una solicitud POST a la API para crear un nuevo gato
-        fetch('https://30f6ed45-fb84-480e-8cb7-5dc79fe76a6d.mock.pstmn.io/Gatos', {
-            method: 'POST', // Usar POST para agregar un nuevo gato
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ 
+        fetch('https://funcionesgato.azurewebsites.net/api/InsertarGato', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
                 nombre: nombreEdit,
                 raza: razaEdit,
-                sexo: sexoEdit,
                 fechaNacimiento: fechaNacimientoEdit,
+                sexo: sexoEdit,
+                personalidad: personalidadEdit,
+                peso: pesoEdit,
                 chip: chipEdit,
                 vacunado: vacunadoEdit,
                 esterilizado: esterilizadoEdit,
-                peso: pesoEdit,
-                personalidad: personalidadEdit,
                 disponibilidad: disponibilidadEdit,
                 historia: historiaEdit,
+                foto: "https://storagegatosunidos.blob.core.windows.net/imagenes/creando_gato.png",
                 descripcion: descripcionEdit
             })
         })
-        .then((res) => res.json())
+        .then(async (res) => {
+            if (!res.ok) {
+                // Leer texto plano en caso de error
+                const errorText = await res.text();
+                throw new Error(errorText);
+            }
+            // Suponemos que la respuesta OK es texto plano también
+            const texto = await res.text();
+            return texto;
+        })
         .then((data) => {
             console.log('Gato insertado:', data);
             alert('Gato insertado con éxito');
+            navigate('/Gatos');
         })
         .catch((err) => {
             console.error('Error al insertar el gato:', err);
-            alert('Error al insertar el gato');
+            alert('Error al insertar el gato: ' + err.message);
         });
     };
 
     // 3 Eliminar un gato existente
+    const eliminarGato = () => {
+        if (!gato) {
+            alert('No hay gato seleccionado para eliminar');
+            return;
+        }
+        const confirmar = window.confirm("¿Estás seguro de que quieres eliminar este gato?");
 
+        if (!confirmar) { // Si el usuario cancela la eliminación, no se hace nada
+            return;
+        }
+
+        fetch(`https://funcionesgato.azurewebsites.net/api/EliminarGato?id=${gato.id}`, {
+            method: 'DELETE',
+        })
+        .then(async (res) => {
+            if (!res.ok) {
+                const errorText = await res.text();
+                throw new Error(errorText);
+            }
+            return res.text();
+        })
+        .then((data) => {
+            console.log('Gato eliminado:', data);
+            alert('Gato eliminado con éxito');
+            navigate('/Gatos');
+        })
+        .catch((err) => {
+            console.error('Error al eliminar el gato:', err);
+            alert('Error al eliminar el gato: ' + err.message);
+        });
+    };
 
     // Return del componente Gato. Aqui se manejan 4 modos: Leer, editar, insertar y eliminar --------------------------------------------------------------------------------------
     return (
@@ -227,7 +271,7 @@ const Gato = () => {
                         <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">🗒️ Descripción</span><input type="text" className="inputHistoriayDescripcion" value={descripcionEdit} onChange={(e) => setDescripcionEdit(e.target.value)}/></div>
                     </div>
                     <button className="botonInsertarGato" onClick={postGato}>✏️ Crear</button>
-                </div>
+                </div>  
                 </>
             )}
 
@@ -244,13 +288,7 @@ const Gato = () => {
                         </div>
                         <div className="gatoEliminar" key={gato.id}><img src={gato.foto} alt={gato.nombre} className="fotoGatoEliminar" /></div>
                     </div>
-                    <button className="botonEliminarGato" onClick={() => {
-                        if (window.confirm("¿Estás seguro de que quieres eliminar este gato?")) {
-                        alert("Eliminando gato...");
-                            // Aqui poner el codigo para enviar delelte a azure
-                        }
-                    }}> ❌ Eliminar
-                    </button>
+                    <button className="botonEliminarGato" onClick={eliminarGato}> ❌ Eliminar </button>
                 </div>
                 </>
             )}
