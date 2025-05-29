@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 
-// Interfaz que define la estructura de los datos de los gatos
+// Interfaz que define la estructura de los datos resumidos de los gatos
 interface interfazGatos {
     id: number;
     nombre: string;

@@ -24,7 +24,7 @@ interface InterfazGato {
 const Gato = () => {
     const navigate = useNavigate(); // Hook para navegar entre rutas (para redirigir a la lista de Gatos despues de editar, insertar o eliminar)
     const [gato, setGato] = useState<InterfazGato | null>(null); // Estado para almacenar los datos del gato
-    const [searchParams] = useSearchParams(); // Obtiene los parametros de buslqueda de la URL
+    const [searchParams] = useSearchParams(); // Obtiene los parametros de busqueda de la URL
     const modo = searchParams.get('modo'); // Obtiene el modo de la URL (lectura, editar, crear, eliminar)
     const { id } = useParams<{ id: string }>(); // Obtiene el id del gato desde la URL
     
@@ -115,13 +115,14 @@ const Gato = () => {
         });
     };
 
-
     // 2 Insertar gato nuevo
     const postGato = () => {
         // Se envía una solicitud POST a la API para crear un nuevo gato
         fetch('https://funcionesgato.azurewebsites.net/api/InsertarGato', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({
                 nombre: nombreEdit,
                 raza: razaEdit,
@@ -154,23 +155,21 @@ const Gato = () => {
             navigate('/Gatos');
         })
         .catch((err) => {
-            console.error('Error al insertar el gato:', err);
-            alert('Error al insertar el gato: ' + err.message);
+            console.error('Error al insertar al gato:', err);
+            alert('Error al insertar al gato: ' + err.message);
         });
     };
 
     // 3 Eliminar un gato existente
     const eliminarGato = () => {
         if (!gato) {
-            alert('No hay gato seleccionado para eliminar');
+            alert('No hay gato para eliminar');
             return;
         }
         const confirmar = window.confirm("¿Estás seguro de que quieres eliminar este gato?");
-
         if (!confirmar) { // Si el usuario cancela la eliminación, no se hace nada
             return;
         }
-
         fetch(`https://funcionesgato.azurewebsites.net/api/EliminarGato?id=${gato.id}`, {
             method: 'DELETE',
         })
@@ -222,7 +221,7 @@ const Gato = () => {
                         <img src={gato.foto} alt={gato.nombre} className="fotoGato" />
                     </div>
                 </div>
-            </>
+                </>
             )}
  
             

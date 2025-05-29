@@ -1,4 +1,24 @@
-.fotoContacto {
-    width: 50px;
-    height: 50px;
-  }
+.contenedorContacto {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
+.whatsapp {
+  border: 1px solid red;
+  width: 40%;
+  height: auto;
+}
+
+.contacto-whatsapp {
+
+}
+
+.formulario {
+  border: 1px solid yellow;
+  width: 40%;
+  height: auto;
+}
+
