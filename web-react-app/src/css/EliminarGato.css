@@ -1,0 +1,74 @@
+.contenedorGatoEliminar {
+  margin: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10px;
+  align-items: center;
+}
+
+.tituloGatoEliminar {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1e4050;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.fichaGatoEliminar {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  height: auto;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  justify-content: left;
+  border-radius: 10px;
+}
+
+.divAtributosGatoEliminar {
+  margin: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.atributoGatoEliminar {
+  background-color: #1e4050;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: left;
+  border-radius: 6px;
+}
+
+.gatoEliminar {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.gatoEliminar img {
+  width: 300px;
+  height: 200px;
+  border-radius: 12px;
+}
+
+.botonEliminarGato {
+  margin-top: 50px;
+  cursor: pointer;
+  padding: 8px 12px;
+  background-color: #5b96a6;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.botonEliminarGato:hover {
+  background-color: #5aea66;
+}

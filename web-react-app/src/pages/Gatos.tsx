@@ -8,14 +8,34 @@ interface interfazGatos {
     id: number;
     nombre: string;
     foto: string;
-    descripcion: string;
+    raza: string;
+    fechaNacimiento: string;
 }
 
+// Calcular la edad del gato
+const calcularEdadGato = (fechaNacimiento: string): string => {
+    const fechaNac = new Date(fechaNacimiento);
+    const fechaActual = new Date();
+    let años = fechaActual.getFullYear() - fechaNac.getFullYear();
+    let meses = fechaActual.getMonth() - fechaNac.getMonth();
+
+    if (fechaActual.getDate() < fechaNac.getDate()) {
+        meses--;
+    }
+    if (meses < 0) {
+        años--;
+        meses += 12;
+    }
+    if (años <= 0) {
+        return `${meses} mes${meses === 1 ? '' : 'es'}`;
+    } else {
+        return `${años} año${años === 1 ? '' : 's'}`;
+    }
+};
+
 const Gatos = () => {
-    // Definir el estado para los gatos
-    const [gatos, setGatos] = useState<interfazGatos[]>([]);
-    // Definir el estado para el modo (lectura, editar, crear, eliminar) 
-    const [modo, setModo] = useState('lectura');
+    const [gatos, setGatos] = useState<interfazGatos[]>([]); // Definir el estado para los gatos
+    const [modo, setModo] = useState('lectura'); // Definir el estado para el modo (lectura, editar, crear, eliminar) 
     const navegar = useNavigate();
 
     // Funcion para cambiar de modo
@@ -24,7 +44,7 @@ const Gatos = () => {
     };
 
     useEffect(() => {
-        fetch('https://storagegatosunidos.blob.core.windows.net/datos/gatos_resumen.json')
+        fetch('https://storagegatosunidos.blob.core.windows.net/datos/gatos_resumen')
             .then((response) => response.json())
             .then((data) => setGatos(data))
             .catch((error) => console.error('Error al obtener listado de gatos', error));
@@ -51,15 +71,18 @@ const Gatos = () => {
                     )}
                     <div className="contenedorGatos">
                         {gatos.map((gato) => (
-                            <div className="gatos" key={gato.id}>
-                                <div className="gatosFoto">
-                                    <Link to={`/Gatos/${gato.id}?modo=${modo}`}><img src={gato.foto}alt={gato.nombre} /></Link>
+                            <Link to={`/Gatos/${gato.id}?modo=${modo}`} key={gato.id}>
+                                <div className="gatos">
+                                    <div className="gatosFoto">
+                                        <img src={gato.foto} alt={gato.nombre} />
+                                    </div>
+                                    <div className="informacionGato">
+                                        <p className="nombreGato">{gato.nombre}</p>
+                                        <p className="razaGato">🐈Raza: {gato.raza}</p>
+                                        <p className="edadGato">🎂 Edad: {calcularEdadGato(gato.fechaNacimiento)}</p>
+                                    </div>
                                 </div>
-                                <div className="informacionGato">
-                                    <p className="nombreGato">{gato.nombre}</p>
-                                    <p className="descripcionGato">{gato.descripcion}</p>
-                                </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
                     </>

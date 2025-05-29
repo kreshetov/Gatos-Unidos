@@ -5,7 +5,7 @@ nav {
     width: 100%;
     margin: 0 auto;
     margin-top: 10px;
-    height: 110px;
+    height: auto;
     padding-left: 10px;
 }
   
@@ -25,7 +25,7 @@ nav li {
 }
   
 nav li a {
-  color: white;
+  color: #1e4050;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   display: block;
   padding: 5px;

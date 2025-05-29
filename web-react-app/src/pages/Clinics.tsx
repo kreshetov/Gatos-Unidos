@@ -7,6 +7,8 @@ interface interfazClinicas {
     nombre: string;
     foto: string;
     descripcion: string;
+    especialidad: string;
+    direccion: string;
 }
 
 const Clinics = () => {
@@ -27,12 +29,18 @@ const Clinics = () => {
         <div>
             <div className="content">
                 <p className="tituloClinicas">Clínicas que Apoyan Nuestra Causa</p>
-                <div className="informacionClinicas">
+                <div className="contenedorClinicas">
                     {clinicas.map((clinica) => (
                         <div className="clinicas" key={clinica.id}>
-                            <h3>{clinica.nombre}</h3>
-                            <Link to={`/Clinics/${clinica.id}`}><img src={clinica.foto}alt={clinica.nombre}/></Link>
-                            <p>{clinica.descripcion}</p>
+                            <div className="clinicasFoto">
+                                <Link to={`/Clinics/${clinica.id}`}><img src={clinica.foto}alt={clinica.nombre}/></Link>
+                            </div>
+                            <div className="informacionClinica">
+                                <p className="nombreClinica">{clinica.nombre}</p>
+                                <p className="atributoClinicas">⭐{clinica.especialidad}</p>
+                                <p className="atributoClinicas">📍{clinica.direccion}</p>
+                                <p className="atributoClinicas">📝{clinica.descripcion}</p>
+                            </div>
                         </div>
                     ))}
                 </div>

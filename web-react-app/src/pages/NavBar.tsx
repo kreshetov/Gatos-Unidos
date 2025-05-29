@@ -14,10 +14,10 @@ const NavBar = () => {
                         <li><Link to="Donar">Donar</Link></li>
                         <li><Link to="Adoptar">Adoptar</Link></li>
                         <li><Link to="Reportar">Reportar</Link></li>
+                        
                     </ul>
                 </li>
                 <li> <Link to="ContactUs"> Contacto </Link> </li>
-                <li> <Link to="PersonalArea"> Area personal </Link> </li>
             </ul>
         </nav>
     );
