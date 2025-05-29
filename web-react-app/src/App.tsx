@@ -9,7 +9,6 @@ import AboutUs from './pages/AboutUs';
 import Clinics from './pages/Clinics';
 import Clinica from './pages/Clinica';
 import Colaborate from './pages/Colaborate';
-import ContactUs from './pages/ContactUs';
 import Footer from './pages/Footer'
 import Donar from './pages/Donar';
 import Adoptar from './pages/Adoptar';
@@ -47,7 +46,6 @@ function App() {
               <Route path="/Donar" element={<Donar />} />
               <Route path="/Adoptar" element={<Adoptar />} />
               <Route path="/Reportar" element={<Reportar />} />
-              <Route path="/ContactUs" element={<ContactUs />} />
             </Routes>
           <Footer />
       </Router>
