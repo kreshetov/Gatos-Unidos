@@ -112,7 +112,9 @@ namespace GatosFunctionApp
                 }
 
                 var response = req.CreateResponse(System.Net.HttpStatusCode.OK);
-                await response.WriteStringAsync($"Gato con ID {nuevoId} insertado correctamente.");
+                response.Headers.Add("Content-Type", "application/json; charset=utf-8");
+                var json = JsonSerializer.Serialize(nuevoGato, new JsonSerializerOptions { WriteIndented = true });
+                await response.WriteStringAsync(json);
                 return response;
             }
             catch (Exception ex)

@@ -1,25 +1,22 @@
 .contenedorGatoLectura {
-  margin: 0 auto;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin: 20px auto;
   width: 90%;
   display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
   justify-content: space-between;
   align-items: flex-start;
+  overflow-x: hidden;
 }
 
 .fichaGato {
-  margin-top: 15px;
+  flex: 1 1 300px;
   display: flex;
   flex-direction: column;
-  width: 40%;
-  height: auto;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  justify-content: left;
-  border-radius: 10px;
 }
 
-.divAtributosGato{
+.divAtributosGato {
   margin: 2px;
   display: flex;
   justify-content: flex-start;
@@ -27,34 +24,92 @@
   align-items: center;
 }
 
+.divAtributosGato.columna {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .atributoGato {
   background-color: #1e4050;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding: 0 5px;
   color: white;
   font-weight: bold;
   font-size: 18px;
-  min-width: 210px;
+  min-width: 220px;
   text-align: left;
   border-radius: 6px;
 }
 
 .valorGato {
-    text-align: left;
-    color: #555;
-    font-size: 18px;
+  text-align: left;
+  color: #555;
+  font-size: 18px;
+}
+
+.valorGatoDescripcion, .valorGatoHistoria {
+  display: block;
+  margin-top: 4px;
+  color: #555;
+  font-size: 18px;
+  text-align: left;
+  white-space: pre-wrap; /* para respetar saltos de línea en descripción/historia */
+  word-break: break-word; /* para cortar palabras largas en móvil */
 }
 
 .gato {
-  width: 60%;
+  flex: 1 1 400px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 .gato img {
-  width: 300px;
-  height: 200px;
+  max-width: 300px;
+  width: 100%;
+  height: auto;
   border-radius: 12px;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .contenedorGatoLectura {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .fichaGato,
+  .gato {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .divAtributosGato {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .divAtributosGato.columna {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .atributoGato {
+    min-width: auto;
+    font-size: 16px;
+    padding: 4px 8px;
+  }
+
+  .valorGato, 
+  .valorGatoDescripcion, 
+  .valorGatoHistoria {
+    font-size: 16px;
+  }
+
+  .gato img {
+    max-width: 180px;
+    width: 100%;
+    height: auto;
+  }
 }

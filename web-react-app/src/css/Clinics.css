@@ -1,3 +1,16 @@
+/* Reset básico para box-sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Link sin subrayado */
+a {
+  text-decoration: none;
+}
+
+ /* Título principal */
 .tituloClinicas {
   text-align: center;
   font-size: 34px;
@@ -5,77 +18,78 @@
   color: #1e4050;
 }
 
+/* Contenedor general de tarjetas */
 .contenedorClinicas {
   display: flex;
   flex-wrap: wrap;;
-  gap: 20px;
   justify-content: center;
+  gap: 20px;
   padding-bottom: 10px;
-  margin-bottom: 20px;
+  max-width: 100%;
 }
-  
+
+/* Tarjeta individual */
 .clinicas{
-  color: black;
-  width: 350px;
-  height: auto;
+  width: 300px;
+  max-width: 100%;
   border-radius: 10px;
   text-align: center;
   margin: 0;
   box-shadow: inset 0 0 20px rgba(30, 64, 80, 0.2);
   border: 1px solid black;
-  gap: 0;
   cursor: pointer;
-}
-
-.clinicas img {
-  border-radius: 10px;
-  border-bottom-left-radius: 0px;
-  border-bottom-right-radius: 0px;
-  width: 350px;
-  height: 200px;
-  box-shadow: 0 0 20px #1e4050;
-}
-
-.clinicas:hover {
-  box-shadow: 0 0 20px #1e4050;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Evita que contenido sobresalga */
+  background-color: white;
   transition: box-shadow 0.3s ease;
 }
 
-.clinicasFoto {
-  width: 350px;
-  height: 200px;
+/* Efecto hover para la tarjeta */
+.clinicas:hover {
+  box-shadow: 0 0 20px #1e4050;
 }
 
-.informacionClinica {
-  display: flex;
-  width: 350px;
+/* Imagen de la clinica */
+.clinicas img {
+  width: 100%;
   height: auto;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 0 20px #1e4050;
+  display: block;
+}
+
+/* Contenedor de informacion clinica */
+.informacionClinica {
+  padding: 10px;
+  display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Asegura que los elementos estén alineados al principio */
-  gap: 0px; /* Controla la separación entre los elementos */
-  margin: 0; /* Elimina cualquier margen extra */
-  padding: 0; /* Elimina cualquier padding extra */
+  gap: 4px;
   align-items: center;
 }
 
+/* Nombre de la clinica */
 .nombreClinica {
   font-family: Arial, sans-serif;
   font-size: 20px;
   font-weight: bold;
   color: white;
   background-color: #5b96a6;
-  padding: 5px;
-  margin-top: -20px;
+  padding: 5px 10px;
   border-radius: 10px;
   border: 2px solid white;
+  margin-top: -20px;
+  width: fit-content;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
+/* Efecto hover para el nombre de la clinica */
 .nombreClinica:hover {
   background-color: white;
   color: #1e4050;
   border: 2px solid #1e4050;
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
+
 
 .atributoClinicas {
   font-family: Arial, sans-serif;

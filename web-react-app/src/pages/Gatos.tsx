@@ -44,7 +44,7 @@ const Gatos = () => {
     };
 
     useEffect(() => {
-        fetch('https://storagegatosunidos.blob.core.windows.net/datos/gatos_resumen')
+        fetch(`https://storagegatosunidos.blob.core.windows.net/datos/gatos_resumen?nocache=${Date.now()}`)
             .then((response) => response.json())
             .then((data) => setGatos(data))
             .catch((error) => console.error('Error al obtener listado de gatos', error));
@@ -63,7 +63,7 @@ const Gatos = () => {
                 {modo !=="insertar" ? (
                     <>
                     {modo === "lectura" ? (
-                        <p className="tituloGatos">Conoce a Nuestros Gatos en Adopción. </p>
+                        <p className="tituloGatos">Sé Parte del Cambio: Adopta, Acoge o Apadrina un Gato! </p>
                     ) : modo === "editar" ? (
                         <p className="tituloGatos">Selecciona al Gato para editarlo. </p>
                     ) : (

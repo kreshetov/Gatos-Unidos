@@ -1,0 +1,80 @@
+.contenedorClinicaInsertar {
+  margin: 0 auto;
+  margin: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10px;
+  align-items: center;
+}
+
+.tituloClinicaInsertar {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1e4050;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.fichaClinicaInsertar {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  height: auto;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  justify-content: left;
+  border-radius: 10px;
+}
+
+.divAtributosClinicaInsertar {
+  margin: 2px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.atributoClinicaInsertar {
+  background-color: #1e4050;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  min-width: 210px;
+  text-align: left;
+  border-radius: 6px;
+}
+
+.botonInsertarClinica {
+  margin-top: 50px;
+  cursor: pointer;
+  padding: 8px 12px;
+  background-color: #5b96a6;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.botonInsertarClinica:hover {
+  background-color: #5aea66;
+}
+
+.input{
+  flex: 1;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  border-color: #1e4050;
+}
+
+.inputHorarioInsertar, .inputDescripcionInsertar{
+  flex: 1;
+  width: 100%;
+  height: 80px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  border-color: #1e4050;
+}

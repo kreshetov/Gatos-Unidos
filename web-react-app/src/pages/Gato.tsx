@@ -29,7 +29,6 @@ const Gato = () => {
     const { id } = useParams<{ id: string }>(); // Obtiene el id del gato desde la URL
     
     // Estados para editar/insertar gato -------------------------------------------------------------------------------------------------------------------------------------------
-    const [idEdit, setIdEdit] = useState<string>(id || '');
     const [nombreEdit, setNombreEdit] = useState<string>('');
     const [razaEdit, setRazaEdit] = useState<string>('');
     const [fechaNacimientoEdit, setFechaNacimientoEdit] = useState<string>('');
@@ -41,14 +40,14 @@ const Gato = () => {
     const [esterilizadoEdit, setEsterilizadoEdit] = useState<boolean>(false);
     const [disponibilidadEdit, setDisponibilidadEdit] = useState<string[]>([]);
     const [historiaEdit, setHistoriaEdit] = useState<string>('');
-    // const [fotoEditada, setFotoEditada] = useState<string>('');
+    const [fotoEdit, setFotoEdit] = useState<string>('');
     const [descripcionEdit, setDescripcionEdit] = useState<string>('');
 
     // Hooks ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     // 1 Obtencion datos del gato. Estos se obtienen de la API. Solo se ejecuta cuando los modos son: lectura, editar, eliminar.
     useEffect(() => { // useEffect se ejecuta una vez al cargar el componente y cada vez que cambia el id del gato
         if (modo !== "insertar") { // Si el modo no es insertar, hace fetch para trear a los gatos
-            fetch(`https://storagegatosunidos.blob.core.windows.net/datos/gato_${id}`) // fetch se utiliza para hacer una solicitud HTTP a la API y obtener los datos del gato
+            fetch(`https://storagegatosunidos.blob.core.windows.net/datos/gato_${id}?nocache=${Date.now()}`) // fetch se utiliza para hacer una solicitud HTTP a la API y obtener los datos del gato
             .then((response) => response.json()) // then se utiliza para manejar la respuesta de la API y convertirla a JSON como un objeto de TypeScript
             .then((data) => setGato(data))
             .catch((error) => console.error('Error al obtener el gato', error)); // catch se utiliza para manejar cualquier error que ocurra durante la solicitud
@@ -59,6 +58,7 @@ const Gato = () => {
     useEffect(() => {
         if (modo === "editar" && gato) {
             setNombreEdit(gato.nombre);
+            setFotoEdit(gato.foto);
             setRazaEdit(gato.raza);
             setFechaNacimientoEdit(gato.fechaNacimiento);
             setSexoEdit(gato.sexo);
@@ -74,20 +74,45 @@ const Gato = () => {
     }, [modo, gato]);
 
     // Metodos ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    
-    // 1 Editar gato existente  
+
+    // 1 Validar campos del formulario del gato
+    const validarCampos = () => {
+    // Campos obligatorios, la foto NO está incluida porque puede quedar vacía
+    if (
+        nombreEdit.trim() === "" ||
+        razaEdit.trim() === "" ||
+        fechaNacimientoEdit.trim() === "" ||
+        sexoEdit.trim() === "" ||
+        personalidadEdit.length === 0 ||
+        pesoEdit <= 0 ||
+        disponibilidadEdit.length === 0 ||
+        historiaEdit.trim() === "" ||
+        descripcionEdit.trim() === ""
+    ) {
+        return false; // Algún campo obligatorio está vacío o inválido
+    }
+    return true; // Todos los campos obligatorios tienen valor válido
+    };
+
+    // 2 Editar gato existente  
     const putGato = () => {
         if (!gato) { // Si no hay gato, no se puede editar
             return;
-        } 
+        }
+        if (!validarCampos()) {
+            alert("Por favor, rellena todos los campos obligatorios (excepto la foto).");
+            return; // No enviar el formulario
+        }
         // Se envia una solicitud PUT a la API para actualizar la información del gato
         fetch('https://funcionesgato.azurewebsites.net/api/EditarGato', {
             method: 'PUT',
             headers: {
+                'Cache-Control': 'no-cache',
+                'Pragma': 'no-cache',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                id: gato.id,
+                id: gato.id, // enviamos el id del gato para identificarlo
                 nombre: nombreEdit,
                 raza: razaEdit,
                 fechaNacimiento: fechaNacimientoEdit,
@@ -99,7 +124,7 @@ const Gato = () => {
                 esterilizado: esterilizadoEdit,
                 disponibilidad: disponibilidadEdit,
                 historia: historiaEdit,
-                foto: gato.foto,
+                foto: fotoEdit,
                 descripcion: descripcionEdit
             })
         })
@@ -117,6 +142,10 @@ const Gato = () => {
 
     // 2 Insertar gato nuevo
     const postGato = () => {
+        if (!validarCampos()) {
+            alert("Por favor, rellena todos los campos obligatorios (excepto la foto).");
+            return; // No enviar el formulario
+        }
         // Se envía una solicitud POST a la API para crear un nuevo gato
         fetch('https://funcionesgato.azurewebsites.net/api/InsertarGato', {
             method: 'POST',
@@ -135,7 +164,7 @@ const Gato = () => {
                 esterilizado: esterilizadoEdit,
                 disponibilidad: disponibilidadEdit,
                 historia: historiaEdit,
-                foto: "https://storagegatosunidos.blob.core.windows.net/imagenes/creando_gato.png",
+                foto: (!fotoEdit || fotoEdit.trim() === "") ? "https://storagegatosunidos.blob.core.windows.net/imagenes/creando_gato.png" : fotoEdit,
                 descripcion: descripcionEdit
             })
         })
@@ -202,15 +231,15 @@ const Gato = () => {
                         <div className="divAtributosGato"><span className="atributoGato">🐱 Nombre</span><span className="valorGato">{gato.nombre}</span></div>   
                         <div className="divAtributosGato"><span className="atributoGato">🧬 Raza</span><span className="valorGato">{gato.raza}</span></div>  
                         <div className="divAtributosGato"><span className="atributoGato">📅 Fecha de Nacimiento</span><span className="valorGato">{gato.fechaNacimiento}</span></div>  
-                        <div className="divAtributosGato"><span className="atributoGato">{gato.sexo === "Macho" ? "🚹" : "🚺"} Sexo</span><span className="valorGato">{gato.sexo}</span></div>  
+                        <div className="divAtributosGato"><span className="atributoGato">🚹🚺Sexo</span><span className="valorGato">{gato.sexo}</span></div>  
                         <div className="divAtributosGato"><span className="atributoGato">🤗 Personalidad</span><span className="valorGato">{gato.personalidad.join(", ")}</span></div>  
                         <div className="divAtributosGato"><span className="atributoGato">⚖️ Peso</span><span className="valorGato">{gato.peso} KG</span></div>  
                         <div className="divAtributosGato"><span className="atributoGato">⚙️ Chip</span><span className="valorGato">{gato.chip ? "Sí" : "No"}</span></div>  
                         <div className="divAtributosGato"><span className="atributoGato">💉 Vacunado</span><span className="valorGato">{gato.vacunado ? "Sí" : "No"}</span></div>
                         <div className="divAtributosGato"><span className="atributoGato">🐾 Esterilizado</span><span className="valorGato">{gato.esterilizado ? "Sí" : "No"}</span></div>  
                         <div className="divAtributosGato"><span className="atributoGato">📅 Disponibilidad</span><span className="valorGato">{gato.disponibilidad.join(", ")}</span></div> 
-                        <div className="divAtributosGato"><span className="atributoGato">📜 Historia</span><span className="valorGato">{gato.historia}</span></div>  
-                        <div className="divAtributosGato"><span className="atributoGato">🗒️ Descripción</span><span className="valorGato">{gato.descripcion}</span></div>
+                        <div className="divAtributosGato columna"><span className="atributoGato">📜 Historia</span><span className="valorGatoHistoria">{gato.historia}</span></div>  
+                        <div className="divAtributosGato columna"><span className="atributoGato">🗒️ Descripción</span><span className="valorGatoDescripcion">{gato.descripcion}</span></div>
                     </div>
                     <div className="gato" key={gato.id}>
                         <img src={gato.foto} alt={gato.nombre} className="fotoGato" />
@@ -232,17 +261,21 @@ const Gato = () => {
                     <p className="tituloGatoEditar">📋 Editar Ficha de {gato.nombre}</p>
                     <div className="fichaGatoEditar">
                         <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">🐱 Nombre</span><input type="text" className="input" value={nombreEdit} onChange={(e) => setNombreEdit(e.target.value)}/></div>
+                        <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">📸 Foto</span><input type="text" className="input" value={fotoEdit} onChange={(e) => setFotoEdit(e.target.value)}/></div>
                         <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">🧬 Raza</span><input type="text" className="input" value={razaEdit} onChange={(e) => setRazaEdit(e.target.value)}/></div>
-                        <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">📅 Fecha de Nacimiento</span><input type="date" className="input" value={fechaNacimientoEdit} onChange={(e) => setFechaNacimientoEdit(e.target.value)}/>   </div>
-                        <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">{gato.sexo === "Macho" ? "🚹" : "🚺"} Sexo</span><input type="text" className="input" value={sexoEdit} onChange={(e) => setSexoEdit(e.target.value)}/>     </div>
+                        <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">📅 Fecha de Nacimiento</span><input type="date" className="input" value={fechaNacimientoEdit} onChange={(e) => setFechaNacimientoEdit(e.target.value)}/></div>
+                        <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">🚹🚺 Sexo</span>
+                            <label style={{ marginRight: "1rem" }}><input type="radio" name="sexo" value="Macho" checked={sexoEdit === "Macho"} onChange={(e) => setSexoEdit(e.target.value)} />{" "} 🚹 Macho </label>
+                            <label> <input type="radio" name="sexo" value="Hembra" checked={sexoEdit === "Hembra"}onChange={(e) => setSexoEdit(e.target.value)}/>{" "}🚺 Hembra</label>
+                        </div>
                         <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">🤗 Personalidad</span><input type="text" className="input" value={personalidadEdit} onChange={(e) => setPersonalidadEdit(e.target.value.split(','))}/></div>
                         <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">⚖️ Peso</span><input type="number" className="input" value={pesoEdit} onChange={(e) => setPesoEdit(parseFloat(e.target.value))}/>  </div>
                         <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">⚙️ Chip</span><input type="checkbox" checked={chipEdit} onChange={(e) => setChipEdit(e.target.checked)}/></div>  
                         <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">💉 Vacunado</span><input type="checkbox" checked={vacunadoEdit} onChange={(e) => setVacunadoEdit(e.target.checked)}/></div>
                         <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">🐾 Esterilizado</span><input type="checkbox" checked={esterilizadoEdit} onChange={(e) => setEsterilizadoEdit(e.target.checked)}/></div>
                         <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">📅 Disponibilidad</span><input type="text" className="input" value={disponibilidadEdit} onChange={(e) => setDisponibilidadEdit(e.target.value.split(','))}/></div>
-                        <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">📜 Historia</span><input type="text" className="inputHistoriayDescripcion" value={historiaEdit} onChange={(e) => setHistoriaEdit(e.target.value)}/></div>
-                        <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">🗒️ Descripción</span><input type="text" className="inputHistoriayDescripcion" value={descripcionEdit} onChange={(e) => setDescripcionEdit(e.target.value)}/></div>
+                        <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">📜 Historia</span><textarea className="inputHistoriaEditar" value={historiaEdit} onChange={(e) => setHistoriaEdit(e.target.value)}/></div>
+                        <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">🗒️ Descripción</span><textarea className="inputDescripcionEditar" value={descripcionEdit} onChange={(e) => setDescripcionEdit(e.target.value)}/></div>
                     </div>
                     <button className="botonEditarGato" onClick={putGato}>✏️ Guardar</button>
                 </div>
@@ -257,9 +290,13 @@ const Gato = () => {
                     <p className="tituloGatoInsertar">📋 Insertando un gato nuevo</p>
                     <div className="fichaGatoInsertar"> 
                         <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">🐱 Nombre</span><input type="text" className="input" value={nombreEdit} onChange={(e) => setNombreEdit(e.target.value)}/></div>
+                        <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">📸 Foto</span><input type="text" className="input" value={fotoEdit} onChange={(e) => setFotoEdit(e.target.value)}/></div>
                         <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">🧬 Raza</span><input type="text" className="input" value={razaEdit} onChange={(e) => setRazaEdit(e.target.value)}/></div>
-                        <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">📅 Fecha de Nacimiento</span><input type="date" className="input" value={fechaNacimientoEdit} onChange={(e) => setFechaNacimientoEdit(e.target.value)}/>   </div>
-                        <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">🚹🚺 Sexo</span><input type="text" className="input" value={sexoEdit} onChange={(e) => setSexoEdit(e.target.value)}/>     </div>
+                        <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">📅 Fecha de Nacimiento</span><input type="date" className="input" value={fechaNacimientoEdit} onChange={(e) => setFechaNacimientoEdit(e.target.value)}/></div>
+                        <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">🚹🚺 Sexo</span>
+                            <label style={{ marginRight: "1rem" }}><input type="radio" name="sexo" value="Macho" checked={sexoEdit === "Macho"} onChange={(e) => setSexoEdit(e.target.value)} />{" "} 🚹 Macho </label>
+                            <label> <input type="radio" name="sexo" value="Hembra" checked={sexoEdit === "Hembra"}onChange={(e) => setSexoEdit(e.target.value)}/>{" "}🚺 Hembra</label>
+                        </div>
                         <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">🤗 Personalidad</span><input type="text" className="input" value={personalidadEdit} onChange={(e) => setPersonalidadEdit(e.target.value.split(','))}/></div>
                         <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">⚖️ Peso</span><input type="number" className="input" value={pesoEdit} onChange={(e) => setPesoEdit(parseFloat(e.target.value))}/>  </div>
                         <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">⚙️ Chip</span> <input type="checkbox" checked={chipEdit} onChange={(e) => setChipEdit(e.target.checked)}/></div>
@@ -269,7 +306,7 @@ const Gato = () => {
                         <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">📜 Historia</span><input type="text" className="inputHistoriayDescripcion" value={historiaEdit} onChange={(e) => setHistoriaEdit(e.target.value)}/></div>
                         <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">🗒️ Descripción</span><input type="text" className="inputHistoriayDescripcion" value={descripcionEdit} onChange={(e) => setDescripcionEdit(e.target.value)}/></div>
                     </div>
-                    <button className="botonInsertarGato" onClick={postGato}>✏️ Crear</button>
+                    <button className="botonInsertarGato" onClick={postGato}>💾 Insertar</button>
                 </div>  
                 </>
             )}
@@ -279,7 +316,7 @@ const Gato = () => {
             {modo ==="eliminar" && gato &&(
                 <>
                 <div className="contenedorGatoEliminar">
-                    <p className="tituloGatoEliminar">📋 MENU ELIMINAR GATO</p>
+                    <p className="tituloGatoEliminar">📋 Eliminar a {gato.nombre}</p>
                     <div className="fichaGatoEliminar"> 
                         <div className="divAtributosGatoEliminar">
                             <span className="atributoGatoEliminar">🐱 ID:</span><span className="valorGato">{gato.id}</span>

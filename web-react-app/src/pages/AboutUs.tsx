@@ -1,5 +1,3 @@
-import react from 'react';
-
 const AboutUs = () => {
     return (
         <div>

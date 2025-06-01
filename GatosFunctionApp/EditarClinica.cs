@@ -11,41 +11,41 @@ using Microsoft.AspNetCore.Mvc.Razor;
 
 namespace GatosFunctionApp
 {
-    public class EditarGato
+    public class EditarClinica
     {
         private readonly ILogger _logger;
 
-        public EditarGato(ILoggerFactory loggerFactory)
+        public EditarClinica(ILoggerFactory loggerFactory)
         {
             _logger = loggerFactory.CreateLogger<EditarGato>();
         }
 
-        private class GatoResumen // Clase para representar el resumen de un gato
+        private class ClinicaResumen // Clase para representar el resumen de una clinica
         {
-            public int id { get; set; } 
+            public int id { get; set; }
             public string nombre { get; set; }
             public string foto { get; set; }
-            public string raza { get; set; }
-            public string fechaNacimiento { get; set; }
+            public string especialidad { get; set; }
+            public string direccion { get; set; }
         }
 
-        [Function("EditarGato")]
+        [Function("EditarClinica")]
         public async Task<HttpResponseData> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "put")] HttpRequestData req)
         {
             try
             {
-                _logger.LogInformation("Editando JSON del gato seleccionado.");
+                _logger.LogInformation("Editando JSON de la clinica seleccionada.");
 
                 string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
 
                 using JsonDocument jsonDoc = JsonDocument.Parse(requestBody);
-                var gatoActualizado = jsonDoc.RootElement;
-                int id = gatoActualizado.GetProperty("id").GetInt32();
-                string nombre = gatoActualizado.GetProperty("nombre").GetString();
-                string foto = gatoActualizado.GetProperty("foto").GetString();
-                string raza = gatoActualizado.GetProperty("raza").GetString();
-                string fechaNacimiento = gatoActualizado.GetProperty("fechaNacimiento").GetString();
+                var clinicaActualizada = jsonDoc.RootElement;
+                int id = clinicaActualizada.GetProperty("id").GetInt32();
+                string nombre = clinicaActualizada.GetProperty("nombre").GetString();
+                string foto = clinicaActualizada.GetProperty("foto").GetString();
+                string especialidad = clinicaActualizada.GetProperty("especialidad").GetString();
+                string direccion = clinicaActualizada.GetProperty("direccion").GetString();
 
                 string connectionString = Environment.GetEnvironmentVariable("AzureWebJobsStorage");
                 if (string.IsNullOrEmpty(connectionString))
@@ -54,20 +54,20 @@ namespace GatosFunctionApp
                 string containerName = "datos";
                 var containerClient = new BlobContainerClient(connectionString, containerName);
 
-                // 1. Actualizar JSON completo del gato
-                string blobNameGato = $"gato_{id}"; // Nombre del blob para el gato específico
-                var blobClientGato = containerClient.GetBlobClient(blobNameGato); // Obtenemos el contenedor del blob
+                // 1. Actualizar JSON completo de la clinica
+                string blobNameClinica = $"clinica_{id}"; // Nombre del blob para la clinica especifica
+                var blobClientClinica = containerClient.GetBlobClient(blobNameClinica); // Obtenemos el contenedor del blob
 
-                using (var msGato = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(requestBody)))
+                using (var msClinica = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(requestBody)))
                 {
-                    await blobClientGato.UploadAsync(msGato, overwrite: true);
+                    await blobClientClinica.UploadAsync(msClinica, overwrite: true);
                 }
 
-                // 2. Leer resumen_gatos.json
-                string blobNameResumen = "gatos_resumen";
+                // 2. Leer clinicas_resume
+                string blobNameResumen = "clinicas_resumen";
                 var blobClientResumen = containerClient.GetBlobClient(blobNameResumen);
 
-                List<GatoResumen> listaResumen = new();
+                List<ClinicaResumen> listaResumen = new();
 
                 if (await blobClientResumen.ExistsAsync())
                 {
@@ -77,33 +77,33 @@ namespace GatosFunctionApp
                     // Mejor usar Stream para deserializar
                     using (var stream = new MemoryStream(downloadResponse.Value.Content.ToArray()))
                     {
-                        listaResumen = JsonSerializer.Deserialize<List<GatoResumen>>(stream) ?? new List<GatoResumen>();
+                        listaResumen = JsonSerializer.Deserialize<List<ClinicaResumen>>(stream) ?? new List<ClinicaResumen>();
                     }
                 }
 
-                // 3. Buscar y actualizar el gato en el resumen
-                var gatoResumen = listaResumen.Find(g => g.id == id);
-                if (gatoResumen != null)
+                // 3. Buscar y actualizar a la clinica en el resumen
+                var clinicaResumen = listaResumen.Find(g => g.id == id);
+                if (clinicaResumen != null)
                 {
-                    gatoResumen.nombre = nombre;
-                    gatoResumen.foto = foto;
-                    gatoResumen.raza = raza;
-                    gatoResumen.fechaNacimiento = fechaNacimiento;
+                    clinicaResumen.nombre = nombre;
+                    clinicaResumen.foto = foto;
+                    clinicaResumen.especialidad = especialidad;
+                    clinicaResumen.direccion = direccion;
                 }
                 else
                 {
                     // Si no existe, agregarlo (opcional)
-                    listaResumen.Add(new GatoResumen
+                    listaResumen.Add(new ClinicaResumen
                     {
                         id = id,
                         nombre = nombre,
                         foto = foto,
-                        raza = raza,
-                        fechaNacimiento = fechaNacimiento
+                        especialidad = especialidad,
+                        direccion = direccion
                     });
                 }
 
-                // 4. Serializar y guardar resumen_gatos actualizado
+                // 4. Serializar y guardar clinicas_resumen actualizado
                 string resumenActualizadoJson = JsonSerializer.Serialize(listaResumen, new JsonSerializerOptions { WriteIndented = true });
                 using (var msResumen = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(resumenActualizadoJson)))
                 {
@@ -111,13 +111,13 @@ namespace GatosFunctionApp
                 }
 
                 var response = req.CreateResponse(System.Net.HttpStatusCode.OK);
-                response.Headers.Add("Content-Type", "application/json; charset=utf-8");
-                await response.WriteStringAsync(requestBody);
+                await response.WriteStringAsync($"Clinica con id {id} y resumen actualizado correctamente.");
+
                 return response;
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error al actualizar gato: {ex.ToString()}");
+                _logger.LogError($"Error al actualizar la clinica: {ex.ToString()}");
 
                 var response = req.CreateResponse(System.Net.HttpStatusCode.InternalServerError);
                 await response.WriteStringAsync($"Error interno: {ex.Message}");

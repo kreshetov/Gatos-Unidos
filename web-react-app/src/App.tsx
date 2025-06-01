@@ -1,4 +1,3 @@
-import React from 'react';
 // Usando react-router para navegar entre componentes
 import { HashRouter as Router, Routes, Route } from 'react-router-dom'; 
 // Importando componentes
@@ -29,6 +28,8 @@ import './css/Donar.css';
 import './css/EditarGato.css';
 import './css/EliminarGato.css';
 import './css/InsertarGato.css';
+import './css/EditarClinica.css';
+import './css/InsertarClinica.css';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
               <Route path="/Gatos/insertar?modo=insertar" element={<Gato/>} />
               <Route path="/Clinics" element={<Clinics />} />
               <Route path="/Clinics/:id" element={<Clinica />} />
+              <Route path="/Clinics/insertar?modo=insertar" element={<Clinica/>} />
               <Route path="/AboutUs" element={<AboutUs />} />
               <Route path="/Colaborate" element={<Colaborate />} />
               <Route path="/Donar" element={<Donar />} />

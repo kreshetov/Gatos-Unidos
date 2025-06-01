@@ -7,7 +7,6 @@ interface interfazClinicas {
     id: number;
     nombre: string;
     foto: string;
-    descripcion: string;
     especialidad: string;
     direccion: string;
 }
@@ -23,10 +22,10 @@ const Clinics = () => {
     };
 
     useEffect(() => {
-        fetch('https://storagegatosunidos.blob.core.windows.net/datos/clinicas_resumen.json')
+        fetch('https://storagegatosunidos.blob.core.windows.net/datos/clinicas_resumen')
             .then((response) => response.json())
             .then((data) => {
-                console.log(data); // Verifica los datos
+                console.log(data);
                 setClinicas(data);
             })
             .catch((error) => console.error('Error al obtener el listado de clínicas', error));
@@ -35,7 +34,7 @@ const Clinics = () => {
     // Redireccionar a una clinica directamente si el modo es insertar
     useEffect(() => {
         if (modo === "insertar") {
-            navegar("/Clincs/insertar?modo=insertar");
+            navegar("/Clinics/insertar?modo=insertar");
         }
     }, [modo, navegar]);
 
@@ -62,7 +61,6 @@ const Clinics = () => {
                                         <p className="nombreClinica">{clinica.nombre}</p>
                                         <p className="atributoClinicas">⭐{clinica.especialidad}</p>
                                         <p className="atributoClinicas">📍{clinica.direccion}</p>
-                                        <p className="atributoClinicas">📝{clinica.descripcion}</p>
                                     </div>
                                 </div>
                             </Link>
@@ -75,9 +73,9 @@ const Clinics = () => {
                 {/* Botones para cambiar de modo */}
                 <div className="crud">
                     <button className="botonCRUD" onClick={() => cambiarModo('lectura')}>Modo Lectura</button>
-                    <button className="botonCRUD" onClick={() => cambiarModo('editar')}>Editar Gato</button>
-                    <button className="botonCRUD" onClick={() => cambiarModo('insertar')}>Insertar Gato</button>
-                    <button className="botonCRUD" onClick={() => cambiarModo('eliminar')}>Eliminar Gato</button>
+                    <button className="botonCRUD" onClick={() => cambiarModo('editar')}>Editar Clinica</button>
+                    <button className="botonCRUD" onClick={() => cambiarModo('insertar')}>Insertar Clinica</button>
+                    <button className="botonCRUD" onClick={() => cambiarModo('eliminar')}>Eliminar Clinica</button>
                 </div>
             </div>
         </div>
