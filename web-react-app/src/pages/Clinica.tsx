@@ -79,6 +79,7 @@ const Clinica = () => {
     const validarCamposClinica = (clinica: interfazClinica): string[] => {
         const errores: string[] = [];
         const letrasYespacios =  /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/; // Nombre y Especialidad
+        const validarEspecialidad = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s,]+$/;
         const soloDireccion = /^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s.,ªº°#\-\/\\]+$/; // Direccion
         const urlMapa = /^https:\/\/www\.google\.com\/maps\/embed\?[^ ]*!.*$/; // URL Mapa
         const numerosEspaciosGuiones = /^(\d{9}|\d{3}-\d{3}-\d{3}|\d{3} \d{3} \d{3})$/; // Telefono
@@ -91,7 +92,7 @@ const Clinica = () => {
         if (!clinica.nombre || !letrasYespacios.test(clinica.nombre.trim())) {
             errores.push("Nombre invalido: Solo se permiten letras y espacios, y no puede estar vacío.");
         }
-        if (!clinica.especialidad || !letrasYespacios.test(clinica.especialidad.trim())) {
+        if (!clinica.especialidad || !validarEspecialidad.test(clinica.especialidad.trim())) {
             errores.push("Especialidad invalida: Solo se permiten letras y espacios, y no puede estar vacía.");
         }
         if (!clinica.direccion || clinica.direccion.trim() === "" || !soloDireccion.test(clinica.direccion.trim())) {
@@ -334,7 +335,7 @@ const Clinica = () => {
                                 </ul>
                             <span className="atributoClinica">Servicios</span>
                                 <ul className="listaServicios">
-                                {clinica.horario
+                                {clinica.servicios
                                     .split(",") // separa por coma
                                     .map((servicio, index) => (
                                     <li key={index} className="textoClinica">{servicio.trim()}</li> // trim para limpiar espacios

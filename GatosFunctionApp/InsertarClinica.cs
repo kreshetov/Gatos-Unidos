@@ -34,7 +34,7 @@ namespace GatosFunctionApp
             public string email { get; set; }
             public string web { get; set; }
             public string horario { get; set; }
-            public List<string> servicios { get; set; }
+            public string servicios { get; set; }
             public float valoracion { get; set; }
             public int reseñas { get; set; }
 
