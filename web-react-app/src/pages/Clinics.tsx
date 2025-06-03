@@ -15,6 +15,34 @@ const Clinics = () => {
     const [clinicas, setClinicas] = useState<interfazClinicas[]>([]); // Definir el estado para las clínicas
     const [modo, setModo] = useState("lectura"); // Definir el estado para el modo (lectura por defecto)
     const navegar = useNavigate();
+    const [esAdmin, setEsAdmin] = useState(false);
+
+    // Al montar el componente, comprobar si hay sesión admin activa en sessionStorage
+        useEffect(() => {
+            const adminActivo = sessionStorage.getItem("esAdmin");
+            if (adminActivo === "true") {
+                setEsAdmin(true);
+            }
+        }, []);
+
+    // Función para activar modo admin con contraseña
+    const desbloquearAdmin = () => {
+        const contraseña = prompt("Introduce la contraseña de administrador:");
+        if (contraseña === "gatosunidos123") {
+            setEsAdmin(true);
+            sessionStorage.setItem("esAdmin", "true");
+            alert("Modo administrador activado.");
+        } else {
+            alert("Contraseña incorrecta.");
+        }
+    };
+
+     // Función para cerrar sesión admin y limpiar sessionStorage
+    const cerrarSesionAdmin = () => {
+        setEsAdmin(false);
+        sessionStorage.removeItem("esAdmin");
+        alert("Has cerrado sesión de administrador.");
+    };
 
     // Function para cambiar de modo
     const cambiarModo = (nuevoModo: string) => {
@@ -43,10 +71,15 @@ const Clinics = () => {
             <div className="content">
                 {/* Botones para cambiar de modo */}
                 <div className="crud">
-                    <button className="botonCRUD" onClick={() => cambiarModo('lectura')}>Modo Lectura</button>
-                    <button className="botonCRUD" onClick={() => cambiarModo('editar')}>Editar Clinica</button>
-                    <button className="botonCRUD" onClick={() => cambiarModo('insertar')}>Insertar Clinica</button>
-                    <button className="botonCRUD" onClick={() => cambiarModo('eliminar')}>Eliminar Clinica</button>
+                    {esAdmin && (
+                        <>  
+                            <button className="botonCRUD" onClick={() => cambiarModo('lectura')}>Modo Lectura</button>
+                            <button className="botonCRUD" onClick={() => cambiarModo('editar')}>Editar Clinica</button>
+                            <button className="botonCRUD" onClick={() => cambiarModo('insertar')}>Insertar Clinica</button>
+                            <button className="botonCRUD" onClick={() => cambiarModo('eliminar')}>Eliminar Clinica</button>
+                            <button className="botonCRUD" onClick={cerrarSesionAdmin}>Cerrar sesión admin</button>
+                        </>
+                    )}
                 </div>
                 {modo !=="insertar" ? (
                     <>
@@ -72,11 +105,16 @@ const Clinics = () => {
                                 </div>
                             </Link>
                         ))}
+                        
                     </div>
                     </>
                 ) : (
                     null
                 )}
+                {/* modo admin */}
+                <p className="modoAdminGatos" onClick={desbloquearAdmin}>
+                    © Gatos Unidos 🐾
+                </p>
             </div>
         </div>
     );

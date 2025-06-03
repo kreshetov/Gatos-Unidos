@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 
 // Interfaz que define la estructura de los datos resumidos de los gatos
 interface interfazGatos {
@@ -34,11 +32,38 @@ const calcularEdadGato = (fechaNacimiento: string): string => {
 };
 
 const Gatos = () => {
-    const [gatos, setGatos] = useState<interfazGatos[]>([]); // Definir el estado para los gatos
-    const [modo, setModo] = useState('lectura'); // Definir el estado para el modo (lectura, editar, crear, eliminar) 
+    const [gatos, setGatos] = useState<interfazGatos[]>([]);
+    const [modo, setModo] = useState('lectura');
+    const [esAdmin, setEsAdmin] = useState(false);
     const navegar = useNavigate();
 
-    // Funcion para cambiar de modo
+    // Al montar el componente, comprobar si hay sesión admin activa en sessionStorage
+    useEffect(() => {
+        const adminActivo = sessionStorage.getItem("esAdmin");
+        if (adminActivo === "true") {
+            setEsAdmin(true);
+        }
+    }, []);
+
+    // Función para activar modo admin con contraseña
+    const desbloquearAdmin = () => {
+        const contraseña = prompt("Introduce la contraseña de administrador:");
+        if (contraseña === "gatosunidos123") {
+            setEsAdmin(true);
+            sessionStorage.setItem("esAdmin", "true");
+            alert("Modo administrador activado.");
+        } else {
+            alert("Contraseña incorrecta.");
+        }
+    };
+
+    // Función para cerrar sesión admin y limpiar sessionStorage
+    const cerrarSesionAdmin = () => {
+        setEsAdmin(false);
+        sessionStorage.removeItem("esAdmin");
+        alert("Has cerrado sesión de administrador.");
+    };
+
     const cambiarModo = (nuevoModo: string) => {
         setModo(nuevoModo);
     };
@@ -50,7 +75,6 @@ const Gatos = () => {
             .catch((error) => console.error('Error al obtener listado de gatos', error));
     }, []);
 
-    // Redireccionar a gato directamente si el modo es insertar
     useEffect(() => {
         if (modo === 'insertar') {
             navegar('/Gatos/insertar?modo=insertar');
@@ -60,42 +84,55 @@ const Gatos = () => {
     return (
         <div>
             <div className="content">
-                {/* Botones para cambiar de modo */}        
+                {/* Botones CRUD */}
                 <div className="crud">
-                    <button className="botonCRUD" onClick={() => cambiarModo('lectura')}>Modo Lectura</button>
-                    <button className="botonCRUD" onClick={() => cambiarModo('editar')}>Editar Gato</button>
-                    <button className="botonCRUD" onClick={() => cambiarModo('insertar')}>Insertar Gato</button>
-                    <button className="botonCRUD" onClick={() => cambiarModo('eliminar')}>Eliminar Gato</button>
-                </div>
-                {modo !=="insertar" ? (
-                    <>
-                    {modo === "lectura" ? (
-                        <p className="tituloGatos">Sé Parte del Cambio: Adopta, Acoge o Apadrina un Gato! </p>
-                    ) : modo === "editar" ? (
-                        <p className="tituloGatos">Selecciona al Gato para editarlo. </p>
-                    ) : (
-                        <p className="tituloGatos"> Selecciona al Gato que se desee eliminar. </p>
+                    {esAdmin && (
+                        <>
+                            <button className="botonCRUD" onClick={() => cambiarModo('lectura')}>Modo Lectura</button>
+                            <button className="botonCRUD" onClick={() => cambiarModo('editar')}>Editar Gato</button>
+                            <button className="botonCRUD" onClick={() => cambiarModo('insertar')}>Insertar Gato</button>
+                            <button className="botonCRUD" onClick={() => cambiarModo('eliminar')}>Eliminar Gato</button>
+                            <button className="botonCRUD" onClick={cerrarSesionAdmin}>Cerrar sesión admin</button>
+                        </>
                     )}
-                    <div className="contenedorGatos">
-                        {gatos.map((gato) => (
-                            <Link to={`/Gatos/${gato.id}?modo=${modo}`} key={gato.id}>
-                                <div className="gatos">
-                                    <div className="gatosFoto">
-                                        <img src={gato.foto} alt={gato.nombre} />
+                </div>
+
+                {/* Modo y título */}
+                {modo !== "insertar" && (
+                    <>
+                        {modo === "lectura" ? (
+                            <p className="tituloGatos">Sé Parte del Cambio: Adopta, Acoge o Apadrina un Gato!</p>
+                        ) : modo === "editar" ? (
+                            <p className="tituloGatos">Selecciona al Gato para editarlo.</p>
+                        ) : (
+                            <p className="tituloGatos">Selecciona al Gato que se desee eliminar.</p>
+                        )}
+                        <div className="contenedorGatos">
+                            {gatos.map((gato) => (
+                                <Link to={`/Gatos/${gato.id}?modo=${modo}`} key={gato.id}>
+                                    <div className="gatos">
+                                        <div className="gatosFoto">
+                                            <img src={gato.foto} alt={gato.nombre} />
+                                        </div>
+                                        <div className="informacionGato">
+                                            <p className="nombreGato">{gato.nombre}</p>
+                                            <p className="razaGato">🐈Raza: {gato.raza}</p>
+                                            <p className="edadGato">🎂 Edad: {calcularEdadGato(gato.fechaNacimiento)}</p>
+                                        </div>
                                     </div>
-                                    <div className="informacionGato">
-                                        <p className="nombreGato">{gato.nombre}</p>
-                                        <p className="razaGato">🐈Raza: {gato.raza}</p>
-                                        <p className="edadGato">🎂 Edad: {calcularEdadGato(gato.fechaNacimiento)}</p>
-                                    </div>
-                                </div>
-                            </Link>
-                        ))}
-                    </div>
+                                </Link>
+                            ))}
+                        </div>
                     </>
-                ) : (
-                   null
-                )} 
+                )}
+
+                {/* Texto oculto para activar modo admin */}
+                <p 
+                    style={{ fontSize: '10px', color: 'gray', textAlign: 'center', cursor: 'pointer', marginTop: '20px' }} 
+                    onClick={desbloquearAdmin}
+                >
+                    © Gatos Unidos 🐾
+                </p>
             </div>
         </div>
     );

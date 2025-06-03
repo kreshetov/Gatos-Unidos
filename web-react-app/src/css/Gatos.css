@@ -144,6 +144,14 @@ a {
   color: white;
 }
 
+.modoAdminGatos {
+  font-size: 10px;
+  color: grey;
+  text-align: center;
+  cursor: pointer; 
+  margin-top: 20px
+}
+
 /* Responsive para pantallas pequeñas */
 @media (max-width: 400px) {
   .gatos {

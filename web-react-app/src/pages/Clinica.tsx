@@ -122,8 +122,8 @@ const Clinica = () => {
         if (horarioEdit.trim() === "" || !validarHorario.test(horarioEdit)) {
             errores.push("Horario inválido: Debe contener letras, números, espacios y signos de puntuación básicos.");
         }
-        if (!descripcionValida.test(clinica.descripcion || "")) {
-            errores.push("Descripción invalida: No puede estar vacía ni contener solo espacios.");
+        if (!descripcionEdit || descripcionEdit.trim() === "") {
+            errores.push("Descripción inválida: No puede estar vacía ni contener solo espacios.");
         }
         return errores;
     };
