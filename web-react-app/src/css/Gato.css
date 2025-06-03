@@ -48,12 +48,11 @@
 
 .valorGatoDescripcion, .valorGatoHistoria {
   display: block;
-  margin-top: 4px;
   color: #555;
   font-size: 18px;
   text-align: left;
-  white-space: pre-wrap; /* para respetar saltos de línea en descripción/historia */
-  word-break: break-word; /* para cortar palabras largas en móvil */
+  white-space: pre-wrap;
+  word-break: break-word;
 }
 
 .gato {
@@ -66,7 +65,7 @@
 }
 
 .gato img {
-  max-width: 300px;
+  max-width: 400px;
   width: 100%;
   height: auto;
   border-radius: 12px;

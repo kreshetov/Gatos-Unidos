@@ -76,35 +76,73 @@ const Gato = () => {
     // Metodos ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     // 1 Validar campos del formulario del gato
-    const validarCampos = () => {
-    // Campos obligatorios, la foto NO está incluida porque puede quedar vacía
-    if (
-        nombreEdit.trim() === "" ||
-        razaEdit.trim() === "" ||
-        fechaNacimientoEdit.trim() === "" ||
-        sexoEdit.trim() === "" ||
-        personalidadEdit.length === 0 ||
-        pesoEdit <= 0 ||
-        disponibilidadEdit.length === 0 ||
-        historiaEdit.trim() === "" ||
-        descripcionEdit.trim() === ""
-    ) {
-        return false; // Algún campo obligatorio está vacío o inválido
+    const validarCamposGato = (gato: InterfazGato): string[] => {
+        const errores: string[] = [];
+        const letrasYespacios =  /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+        const letrasNumerosSimbolos = /^[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s.,¡!?:;-]+$/;
+        const hoy = new Date().toISOString().split("T")[0];
+
+        if (gato.nombre === "" || !letrasYespacios.test(gato.nombre)) {
+            errores.push("Nombre invalido: Solo se permiten letrasy  espacios");
+        }
+        if (gato.raza === "" || !letrasYespacios.test(gato.raza)) {
+            errores.push("Raza inválida: Solo se permiten letras");
+        }
+        if (!gato.fechaNacimiento || gato.fechaNacimiento.trim() === "") {
+            errores.push("Fecha de nacimiento inválida: Debes seleccionar una fecha");
+        } else if (gato.fechaNacimiento > hoy) {
+            errores.push("Fecha de nacimiento inválida: No puede ser futura");
+        }
+        if (!gato.sexo || gato.sexo.trim() === "") {
+        errores.push("Sexo inválido: Debes seleccionar el sexo del gato");
+}
+        if (gato.personalidad.length === 0 || gato.personalidad.some(personalidad => !letrasYespacios.test(personalidad))) {
+            errores.push("Personalidad inválida: Debe contener al menos una opción y solo letras, puedes separar las opciones con comas o espacios");
+        }
+        if (gato.peso <= 0) {
+            errores.push("Peso inválido: Tiene que pesar mas de 0 KG");
+        }
+        if (gato.disponibilidad.length === 0) {
+            errores.push("Disponibilidad inválida: Tienes que elegir al menos una opción (Adoptar, Acoger o Apadrinar)");
+        }
+        if (gato.historia === "" || !letrasNumerosSimbolos.test(gato.historia)) {
+            errores.push("Historia inválida");
+        }
+        if (gato.descripcion === "" || !letrasNumerosSimbolos.test(gato.descripcion)) {
+            errores.push("Descripción inválida");
     }
-    return true; // Todos los campos obligatorios tienen valor válido
-    };
+
+        return errores;
+        };
+
 
     // 2 Editar gato existente  
-    const putGato = () => {
-        if (!gato) { // Si no hay gato, no se puede editar
-            return;
+    const putGato = async () => {
+        if (!gato) return;
+        // Validar y obtener lista de errores
+        const errores = validarCamposGato({
+            id: gato.id,
+            nombre: nombreEdit,
+            raza: razaEdit,
+            fechaNacimiento: fechaNacimientoEdit,
+            sexo: sexoEdit,
+            personalidad: personalidadEdit,
+            peso: pesoEdit,
+            chip: chipEdit,
+            vacunado: vacunadoEdit,
+            esterilizado: esterilizadoEdit,
+            disponibilidad: disponibilidadEdit,
+            historia: historiaEdit,
+            foto: fotoEdit,
+            descripcion: descripcionEdit
+        });
+
+        if (errores.length > 0) {
+            alert("Corrige los siguientes errores:\n" + errores.join("\n"));
+            return; // No enviar el formulario si hay errores
         }
-        if (!validarCampos()) {
-            alert("Por favor, rellena todos los campos obligatorios (excepto la foto).");
-            return; // No enviar el formulario
-        }
-        // Se envia una solicitud PUT a la API para actualizar la información del gato
-        fetch('https://funcionesgato.azurewebsites.net/api/EditarGato', {
+        try {
+            const res = await fetch('https://funcionesgato.azurewebsites.net/api/EditarGato', {
             method: 'PUT',
             headers: {
                 'Cache-Control': 'no-cache',
@@ -112,7 +150,7 @@ const Gato = () => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                id: gato.id, // enviamos el id del gato para identificarlo
+                id: gato.id,
                 nombre: nombreEdit,
                 raza: razaEdit,
                 fechaNacimiento: fechaNacimientoEdit,
@@ -126,27 +164,43 @@ const Gato = () => {
                 historia: historiaEdit,
                 foto: fotoEdit,
                 descripcion: descripcionEdit
-            })
-        })
-        .then(res => res.text())
-        .then(data => {
+            }),
+            });
+            const data = await res.text();
             console.log('Gato actualizado:', data);
             alert('Ficha guardada con éxito');
             navigate('/Gatos');
-        })
-        .catch(err => {
+        } catch (err) {
             console.error('Error al guardar la ficha:', err);
             alert('Error al guardar la ficha');
-        });
-    };
-
-    // 2 Insertar gato nuevo
-    const postGato = () => {
-        if (!validarCampos()) {
-            alert("Por favor, rellena todos los campos obligatorios (excepto la foto).");
-            return; // No enviar el formulario
         }
-        // Se envía una solicitud POST a la API para crear un nuevo gato
+        };
+
+    // 3 Insertar gato nuevo
+    const postGato = () => {
+        const errores = validarCamposGato({
+            id: 0, // Se ignora en el POST
+            nombre: nombreEdit,
+            raza: razaEdit,
+            fechaNacimiento: fechaNacimientoEdit,
+            sexo: sexoEdit,
+            personalidad: personalidadEdit,
+            peso: pesoEdit,
+            chip: chipEdit,
+            vacunado: vacunadoEdit,
+            esterilizado: esterilizadoEdit,
+            disponibilidad: disponibilidadEdit,
+            historia: historiaEdit,
+            foto: fotoEdit,
+            descripcion: descripcionEdit
+        });
+
+        if (errores.length > 0) {
+            alert("Errores en el formulario:\n\n" + errores.join("\n"));
+            return;
+        }
+
+        // Si todo es válido, hacemos el POST
         fetch('https://funcionesgato.azurewebsites.net/api/InsertarGato', {
             method: 'POST',
             headers: {
@@ -164,17 +218,17 @@ const Gato = () => {
                 esterilizado: esterilizadoEdit,
                 disponibilidad: disponibilidadEdit,
                 historia: historiaEdit,
-                foto: (!fotoEdit || fotoEdit.trim() === "") ? "https://storagegatosunidos.blob.core.windows.net/imagenes/creando_gato.png" : fotoEdit,
+                foto: (!fotoEdit || fotoEdit.trim() === "") 
+                    ? "https://storagegatosunidos.blob.core.windows.net/imagenes/creando_gato.png" 
+                    : fotoEdit,
                 descripcion: descripcionEdit
             })
         })
         .then(async (res) => {
             if (!res.ok) {
-                // Leer texto plano en caso de error
                 const errorText = await res.text();
                 throw new Error(errorText);
             }
-            // Suponemos que la respuesta OK es texto plano también
             const texto = await res.text();
             return texto;
         })
@@ -189,7 +243,7 @@ const Gato = () => {
         });
     };
 
-    // 3 Eliminar un gato existente
+    // 4 Eliminar un gato existente
     const eliminarGato = () => {
         if (!gato) {
             alert('No hay gato para eliminar');
@@ -243,11 +297,6 @@ const Gato = () => {
                     </div>
                     <div className="gato" key={gato.id}>
                         <img src={gato.foto} alt={gato.nombre} className="fotoGato" />
-                        <img src={gato.foto} alt={gato.nombre} className="fotoGato" />
-                        <img src={gato.foto} alt={gato.nombre} className="fotoGato" />
-                        <img src={gato.foto} alt={gato.nombre} className="fotoGato" />
-                        <img src={gato.foto} alt={gato.nombre} className="fotoGato" />
-                        <img src={gato.foto} alt={gato.nombre} className="fotoGato" />
                     </div>
                 </div>
                 </>
@@ -268,12 +317,26 @@ const Gato = () => {
                             <label style={{ marginRight: "1rem" }}><input type="radio" name="sexo" value="Macho" checked={sexoEdit === "Macho"} onChange={(e) => setSexoEdit(e.target.value)} />{" "} 🚹 Macho </label>
                             <label> <input type="radio" name="sexo" value="Hembra" checked={sexoEdit === "Hembra"}onChange={(e) => setSexoEdit(e.target.value)}/>{" "}🚺 Hembra</label>
                         </div>
-                        <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">🤗 Personalidad</span><input type="text" className="input" value={personalidadEdit} onChange={(e) => setPersonalidadEdit(e.target.value.split(','))}/></div>
-                        <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">⚖️ Peso</span><input type="number" className="input" value={pesoEdit} onChange={(e) => setPesoEdit(parseFloat(e.target.value))}/>  </div>
+                        <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">🤗 Personalidad</span><input type="text" className="input" value={personalidadEdit} onChange={(e) => setPersonalidadEdit(e.target.value.split(','))}/></div>   
+                        <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">⚖️ Peso</span><input type="number" className="input" value={pesoEdit} onChange={(e) => setPesoEdit(e.target.value ? parseFloat(e.target.value) : 0)}/>  </div>
                         <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">⚙️ Chip</span><input type="checkbox" checked={chipEdit} onChange={(e) => setChipEdit(e.target.checked)}/></div>  
                         <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">💉 Vacunado</span><input type="checkbox" checked={vacunadoEdit} onChange={(e) => setVacunadoEdit(e.target.checked)}/></div>
                         <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">🐾 Esterilizado</span><input type="checkbox" checked={esterilizadoEdit} onChange={(e) => setEsterilizadoEdit(e.target.checked)}/></div>
-                        <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">📅 Disponibilidad</span><input type="text" className="input" value={disponibilidadEdit} onChange={(e) => setDisponibilidadEdit(e.target.value.split(','))}/></div>
+                        <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">📅 Disponibilidad</span>{['Adoptar', 'Acoger', 'Apadrinar'].map((opcion) => (
+                            <label key={opcion} style={{ marginRight: '1rem' }}>
+                                <input type="checkbox" value={opcion} checked={disponibilidadEdit.includes(opcion)} onChange={(e) => {
+                                    const valor = e.target.value;
+                                    if (e.target.checked) {
+                                    // Agregar la opción seleccionada al array
+                                    setDisponibilidadEdit([...disponibilidadEdit, valor]);
+                                    } else {
+                                    // Quitar la opción deseleccionada del array
+                                    setDisponibilidadEdit(disponibilidadEdit.filter((d) => d !== valor));
+                                    }
+                                }}/>{' '}{opcion}
+                            </label>
+                            ))}
+                        </div>
                         <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">📜 Historia</span><textarea className="inputHistoriaEditar" value={historiaEdit} onChange={(e) => setHistoriaEdit(e.target.value)}/></div>
                         <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">🗒️ Descripción</span><textarea className="inputDescripcionEditar" value={descripcionEdit} onChange={(e) => setDescripcionEdit(e.target.value)}/></div>
                     </div>
@@ -289,22 +352,33 @@ const Gato = () => {
                 <div className="contenedorGatoInsertar">
                     <p className="tituloGatoInsertar">📋 Insertando un gato nuevo</p>
                     <div className="fichaGatoInsertar"> 
-                        <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">🐱 Nombre</span><input type="text" className="input" value={nombreEdit} onChange={(e) => setNombreEdit(e.target.value)}/></div>
-                        <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">📸 Foto</span><input type="text" className="input" value={fotoEdit} onChange={(e) => setFotoEdit(e.target.value)}/></div>
-                        <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">🧬 Raza</span><input type="text" className="input" value={razaEdit} onChange={(e) => setRazaEdit(e.target.value)}/></div>
+                        <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">🐱 Nombre</span><input type="text" className="input" placeholder="Colita Feliz..." value={nombreEdit} onChange={(e) => setNombreEdit(e.target.value)}/></div>
+                        <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">📸 Foto</span><input type="text" className="input" placeholder="URL de una foto o deja el campo en blanco..." value={fotoEdit} onChange={(e) => setFotoEdit(e.target.value)}/></div>
+                        <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">🧬 Raza</span><input type="text" className="input" placeholder="Persa..." value={razaEdit} onChange={(e) => setRazaEdit(e.target.value)}/></div>
                         <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">📅 Fecha de Nacimiento</span><input type="date" className="input" value={fechaNacimientoEdit} onChange={(e) => setFechaNacimientoEdit(e.target.value)}/></div>
-                        <div className="divAtributosGatoEditar"><span className="atributoGatoEditar">🚹🚺 Sexo</span>
+                        <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">🚹🚺 Sexo</span>
                             <label style={{ marginRight: "1rem" }}><input type="radio" name="sexo" value="Macho" checked={sexoEdit === "Macho"} onChange={(e) => setSexoEdit(e.target.value)} />{" "} 🚹 Macho </label>
                             <label> <input type="radio" name="sexo" value="Hembra" checked={sexoEdit === "Hembra"}onChange={(e) => setSexoEdit(e.target.value)}/>{" "}🚺 Hembra</label>
                         </div>
-                        <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">🤗 Personalidad</span><input type="text" className="input" value={personalidadEdit} onChange={(e) => setPersonalidadEdit(e.target.value.split(','))}/></div>
-                        <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">⚖️ Peso</span><input type="number" className="input" value={pesoEdit} onChange={(e) => setPesoEdit(parseFloat(e.target.value))}/>  </div>
+                        <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">🤗 Personalidad</span><input type="text" className="input" placeholder="Cariñoso, Jugeton, Cursioso..." value={personalidadEdit} onChange={(e) => setPersonalidadEdit(e.target.value.split(','))}/></div>
+                        <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">⚖️ Peso</span><input type="number" className="input" value={pesoEdit} onChange={(e) => setPesoEdit(e.target.value ? parseFloat(e.target.value) : 0)}/>  </div>
                         <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">⚙️ Chip</span> <input type="checkbox" checked={chipEdit} onChange={(e) => setChipEdit(e.target.checked)}/></div>
                         <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">💉 Vacunado</span><input type="checkbox" checked={vacunadoEdit} onChange={(e) => setVacunadoEdit(e.target.checked)}/></div>
                         <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">🐾 Esterilizado</span> <input type="checkbox" checked={esterilizadoEdit} onChange={(e) => setEsterilizadoEdit(e.target.checked)}/></div>
-                        <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">📅 Disponibilidad</span><input type="text" className="input" value={disponibilidadEdit} onChange={(e) => setDisponibilidadEdit(e.target.value.split(','))}/></div>
-                        <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">📜 Historia</span><input type="text" className="inputHistoriayDescripcion" value={historiaEdit} onChange={(e) => setHistoriaEdit(e.target.value)}/></div>
-                        <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">🗒️ Descripción</span><input type="text" className="inputHistoriayDescripcion" value={descripcionEdit} onChange={(e) => setDescripcionEdit(e.target.value)}/></div>
+                        <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">📅 Disponibilidad</span>{['Adoptar', 'Acoger', 'Apadrinar'].map((opcion) => (
+                            <label key={opcion} style={{ marginRight: '1rem' }}><input type="checkbox" value={opcion} checked={disponibilidadEdit.includes(opcion)} onChange={(e) => {
+                                const valor = e.target.value;
+                                if (e.target.checked) {
+                                // Agregar la opción seleccionada al array
+                                setDisponibilidadEdit([...disponibilidadEdit, valor]);
+                                } else {
+                                // Quitar la opción deseleccionada del array
+                                setDisponibilidadEdit(disponibilidadEdit.filter((tipoDisponibilidad) => tipoDisponibilidad !== valor));
+                                }}}/>{' '}{opcion}
+                                </label>))}
+                        </div>
+                        <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">📜 Historia</span><textarea className="inputHistoriaInsertar" placeholder="Gatito rescatado de una casa abandonada en Málaga..." value={historiaEdit} onChange={(e) => setHistoriaEdit(e.target.value)}/></div>
+                        <div className="divAtributosGatoInsertar"><span className="atributoGatoInsertar">🗒️ Descripción</span><textarea className="inputDescripcionInsertar" placeholder="Es un gato increible! Sera el nuevo dueño de tu sofa y tranquilo, casi no suelta pelo!..." value={descripcionEdit} onChange={(e) => setDescripcionEdit(e.target.value)}/></div>
                     </div>
                     <button className="botonInsertarGato" onClick={postGato}>💾 Insertar</button>
                 </div>  

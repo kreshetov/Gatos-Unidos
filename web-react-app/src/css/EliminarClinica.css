@@ -1,13 +1,12 @@
-.contenedorGatoEliminar {
+.contenedorClinicaEliminar {
   margin: 2px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  gap: 10px;
   align-items: center;
+  gap: 10px;
 }
 
-.tituloGatoEliminar {
+.tituloClinicaEliminar {
   font-size: 24px;
   font-weight: bold;
   color: #1e4050;
@@ -15,21 +14,16 @@
   margin-bottom: 20px;
 }
 
-.fichaGatoEliminar {
-  margin-top: 15px;
+.fichaClinicaEliminar {
   display: flex;
   flex-direction: column;
   width: 40%;
   max-width: 600px;
-  height: auto;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  justify-content: flex-start;
+  font-family: 'Gill Sans', Calibri, 'Trebuchet MS', sans-serif;
   border-radius: 10px;
-  box-sizing: border-box;
 }
 
-.divAtributosGatoEliminar {
-  margin: 2px;
+.divAtributosClinicaEliminar {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -37,75 +31,64 @@
   flex-wrap: wrap;
 }
 
-.atributoGatoEliminar {
+.atributoClinicaEliminar {
   background-color: #1e4050;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding: 0 5px;
   color: white;
   font-weight: bold;
   font-size: 18px;
-  text-align: left;
   border-radius: 6px;
-  box-sizing: border-box;
 }
 
-.gatoEliminar {
+.valorClinica {
+  font-size: 18px;
+}
+
+.clinicaEliminar {
   margin-top: 10px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
   justify-content: center;
 }
 
-.gatoEliminar img {
+.fotoClinicaEliminar {
   width: 100%;
   max-width: 300px;
-  height: auto;
   border-radius: 12px;
-  box-sizing: border-box;
 }
 
-.botonEliminarGato {
-  margin-top: 50px;
-  cursor: pointer;
+.botonEliminarClinica {
+  margin-top: 30px;
   padding: 8px 12px;
   background-color: #5b96a6;
+  color: white;
+  border: none;
   border-radius: 8px;
   font-weight: bold;
+  cursor: pointer;
   transition: background-color 0.2s ease;
-  border: none;
-  color: white;
 }
 
-.botonEliminarGato:hover {
+.botonEliminarClinica:hover {
   background-color: #5aea66;
 }
 
-/* Responsive para móviles */
+/* Responsive */
 @media (max-width: 768px) {
-  .fichaGatoEliminar {
+  .fichaClinicaEliminar {
     width: 95%;
-    max-width: 100%;
     padding: 10px;
   }
 
-  .divAtributosGatoEliminar {
+  .divAtributosClinicaEliminar {
     flex-direction: column;
-    align-items: center;
   }
 
-  .atributoGatoEliminar {
+  .atributoClinicaEliminar {
     font-size: 16px;
-    width: auto;
-    text-align: left;
-    white-space: nowrap;
     margin-bottom: 5px;
   }
 
-  .gatoEliminar img {
+  .fotoClinicaEliminar {
     max-width: 100%;
-    width: 100%;
-    height: auto;
   }
 }
-

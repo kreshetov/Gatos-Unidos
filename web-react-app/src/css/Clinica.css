@@ -1,22 +1,32 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
 .contenedorClinica {
   margin-top: 20px;
   margin-bottom: 20px;
   width: 95%;
   display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
   justify-content: center;
 }
 
 .clinicaNombre {
-  font-family: Arial, sans-serif;
   font-size: 40px;
   font-weight: bold;
   color: #1e4050;
   padding: 5px;
   margin: 0;
   border-radius: 10px;
+  text-align: center;
+  word-wrap: break-word;
+  max-width: 100%;
 }
 
 .nombre_imagen_mapa_Clinica {
+  flex: 1 1 300px;
+  max-width: 100%;
   width: 60%;
   height: auto;
   display: flex;
@@ -52,6 +62,8 @@
 }
 
 .fichaClinica {
+  flex: 1 1 300px;
+  max-width: 100%;
   margin-top: 15px;
   display: flex;
   flex-direction: column;
@@ -64,7 +76,7 @@
 
 .atributoClinica {
   display: inline-block;
-  width: 120px;
+  width: 130px;
   background: #1e4050;
   color: white;
   padding: 6px 8px;
@@ -80,7 +92,11 @@
   line-height: 1.6;
   padding: 3px 0;
   border-radius: 10px;
-  max-width: 800px;
+  width: 100%;
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
   text-align: justify;
 }
 
@@ -98,4 +114,20 @@
   margin: 3px 0;
   font-size: 16px;
   color: #333;
+}
+
+@media (max-width: 768px) {
+  .contenedorClinica {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nombre_imagen_mapa_Clinica,
+  .fichaClinica {
+    width: 90%;
+  }
+
+  .textoClinica {
+    max-width: 100%;
+  }
 }

@@ -1,83 +1,147 @@
-.contenedorClinicaEditar {
-  margin: 0 auto;
-  margin: 2px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 10px;
-  align-items: center;
-}
+  .contenedorClinicaEditar {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    box-sizing: border-box;
+  }
 
-.tituloClinicaEditar {
-  font-size: 24px;
-  font-weight: bold;
-  color: #1e4050;
-  text-align: center;
-  margin-bottom: 20px;
-}
+  .tituloClinicaEditar {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1e4050;
+    text-align: center;
+    margin-bottom: 20px;
+  }
 
-.fichaClinicaEditar {
-  margin-top: 15px;
-  display: flex;
-  flex-direction: column;
-  width: auto;
-  height: auto;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  justify-content: left;
-  border-radius: 10px;
-}
+  .fichaClinicaEditar {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 20px;
+    align-items: center;
+  }
 
-.divAtributosClinicaEditar {
-  margin: 2px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-}
+  .divAtributosClinicaEditar {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    box-sizing: border-box;
+    gap: 4px; /* Menor espacio entre span e input */
+    /* Puedes activar justify-content: space-between si quieres separar más */
+    /* justify-content: space-between; */
+  }
 
-.atributoClinicaEditar {
-  background-color: #1e4050;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  min-width: 210px;
-  text-align: left;
-  border-radius: 6px;
-}
+  .atributoClinicaEditar {
+    background-color: #1e4050;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+    min-width: 160px;
+    box-sizing: border-box;
+    text-align: left;
+    margin: 0; /* eliminar márgenes */
+  }
 
-.botonEditarClinica {
-  margin-top: 50px;
-  cursor: pointer;
-  padding: 8px 12px;
-  background-color: #5b96a6;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: background-color 0.2s ease;
-}
+  .inputEditarClinica,
+  .inputHorarioEditar,
+  .inputDescripcionClinicaEditar {
+    flex: 1; /* Ocupa el resto del espacio */
+    font-size: 16px;
+    padding: 10px;
+    margin-left: 4px; /* Menor margen para acercar al span */
+    border-radius: 6px;
+    border: 1px solid #1e4050;
+    max-width: none; /* quitar límite de ancho */
+    width: 100%;
+    box-sizing: border-box;
+  }
 
-.botonEditarClinica:hover {
-  background-color: #5aea66;
-}
+  .inputDescripcionClinicaEditar,
+  .inputHorarioEditar {
+    height: 100px;
+  }
 
-.input{
-  flex: 1;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  border-color: #1e4050;
-}
+  .botonEditarClinica {
+    margin-top: 30px;
+    cursor: pointer;
+    padding: 10px 16px;
+    background-color: #5b96a6;
+    border-radius: 8px;
+    font-weight: bold;
+    color: white;
+    border: none;
+    transition: background-color 0.2s ease;
+  }
 
-.inputHorario{
-  flex: 1;
-  height: auto;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  border-color: #1e4050;
-}
+  .botonEditarClinica:hover {
+    background-color: #5aea66;
+  }
 
-.inputHorario:hover{
-  
-}
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 768px) {
+    .fichaClinicaEditar {
+      padding: 10px;
+    }
+
+    .divAtributosClinicaEditar {
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+      gap: 6px; /* Un poco más de espacio en móvil para que no quede muy apretado */
+    }
+
+    .atributoClinicaEditar {
+      margin-bottom: 5px;
+      width: 100%;
+      text-align: left;
+    }
+
+    .inputEditarClinica,
+    .inputHorarioEditar,
+    .inputDescripcionClinicaEditar {
+      margin-left: 0;
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .botonEditarClinica {
+      width: 100%;
+      font-size: 14px;
+    }
+
+    .tituloClinicaEditar {
+      font-size: 20px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .tituloClinicaEditar {
+      font-size: 18px;
+    }
+
+    .atributoClinicaEditar {
+      font-size: 13px;
+    }
+
+    .inputEditarClinica,
+    .inputHorarioEditar,
+    .inputDescripcionClinicaEditar {
+      font-size: 14px;
+    }
+
+    .botonEditarClinica {
+      font-size: 13px;
+    }
+  }

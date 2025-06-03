@@ -60,6 +60,13 @@ const Gatos = () => {
     return (
         <div>
             <div className="content">
+                {/* Botones para cambiar de modo */}        
+                <div className="crud">
+                    <button className="botonCRUD" onClick={() => cambiarModo('lectura')}>Modo Lectura</button>
+                    <button className="botonCRUD" onClick={() => cambiarModo('editar')}>Editar Gato</button>
+                    <button className="botonCRUD" onClick={() => cambiarModo('insertar')}>Insertar Gato</button>
+                    <button className="botonCRUD" onClick={() => cambiarModo('eliminar')}>Eliminar Gato</button>
+                </div>
                 {modo !=="insertar" ? (
                     <>
                     {modo === "lectura" ? (
@@ -88,14 +95,7 @@ const Gatos = () => {
                     </>
                 ) : (
                    null
-                )}
-                {/* Botones para cambiar de modo */}        
-                <div className="crud">
-                    <button className="botonCRUD" onClick={() => cambiarModo('lectura')}>Modo Lectura</button>
-                    <button className="botonCRUD" onClick={() => cambiarModo('editar')}>Editar Gato</button>
-                    <button className="botonCRUD" onClick={() => cambiarModo('insertar')}>Insertar Gato</button>
-                    <button className="botonCRUD" onClick={() => cambiarModo('eliminar')}>Eliminar Gato</button>
-                </div>
+                )} 
             </div>
         </div>
     );

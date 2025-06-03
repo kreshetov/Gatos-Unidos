@@ -29,6 +29,7 @@ import './css/EditarGato.css';
 import './css/EliminarGato.css';
 import './css/InsertarGato.css';
 import './css/EditarClinica.css';
+import './css/EliminarClinica.css';
 import './css/InsertarClinica.css';
 
 function App() {

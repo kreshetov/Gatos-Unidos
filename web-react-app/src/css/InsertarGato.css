@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  max-width: 70%; /* Ajuste para escritorio */
+  max-width: 70%;
 }
 
 @media (max-width: 768px) {
@@ -30,7 +30,7 @@
   padding: 20px;
   width: 100%;
   box-sizing: border-box;
-  align-items: center; /* Centra internamente */
+  align-items: center;
   margin-top: 15px;
 }
 
@@ -38,7 +38,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  width: 70%; /* Ajusta el bloque al 70% */
+  width: 70%;
   margin: 5px 0;
   justify-content: space-between;
 }
@@ -53,6 +53,19 @@
   color: white;
   border-radius: 5px;
   padding: 5px;
+}
+
+.inputHistoriaInsertar, .inputDescripcionInsertar {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  flex: 1;
+  font-size: 16px;
+  padding: 6px 8px;
+  border: 1px solid #1e4050;
+  border-radius: 6px;
+  max-width: 400px;
+  width: 100%;
+  height: 100px;
+  box-sizing: border-box;
 }
 
 .botonInsertarGato {

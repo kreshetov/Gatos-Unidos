@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  max-width: 70%; /* Ajuste para escritorio */
+  max-width: 70%; /* Escritorio */
 }
 
 @media (max-width: 768px) {
@@ -37,7 +37,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  width: 70%; /* ✅ Ajusta el bloque a 70% */
+  width: 70%;
   margin: 5px 0;
 }
 
@@ -50,11 +50,11 @@
   box-sizing: border-box;
   color: white;
   border-radius: 5px;
-  padding: 5px
+  padding: 5px;
 }
 
 .input,
-.date {
+.inputHorario {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   flex: 1;
   font-size: 16px;
@@ -74,8 +74,8 @@
   border: 1px solid #1e4050;
   border-radius: 6px;
   max-width: 400px;
-  height: 100px;
   width: 100%;
+  height: 100px;
   box-sizing: border-box;
 }
 
@@ -112,8 +112,18 @@
     text-align: center;
   }
 
-  .inputHistoriaEditar, .inputDescripcionEditar {
+  .input,
+  .inputHorario {
     max-width: 100%;
-    height: 100px;
+    width: 100%;
+  }
+
+  .botonEditarGato {
+    width: 100%;
+    font-size: 14px;
+  }
+
+  .tituloGatoEditar {
+    font-size: 20px;
   }
 }

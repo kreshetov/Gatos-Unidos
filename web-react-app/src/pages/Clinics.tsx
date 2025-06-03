@@ -41,6 +41,13 @@ const Clinics = () => {
     return (
         <div>
             <div className="content">
+                {/* Botones para cambiar de modo */}
+                <div className="crud">
+                    <button className="botonCRUD" onClick={() => cambiarModo('lectura')}>Modo Lectura</button>
+                    <button className="botonCRUD" onClick={() => cambiarModo('editar')}>Editar Clinica</button>
+                    <button className="botonCRUD" onClick={() => cambiarModo('insertar')}>Insertar Clinica</button>
+                    <button className="botonCRUD" onClick={() => cambiarModo('eliminar')}>Eliminar Clinica</button>
+                </div>
                 {modo !=="insertar" ? (
                     <>
                     {modo ==="lectura" ? (
@@ -53,14 +60,14 @@ const Clinics = () => {
                     <div className="contenedorClinicas">
                         {clinicas.map((clinica) => (
                             <Link to={`/Clinics/${clinica.id}?modo=${modo}`} key={clinica.id}>
-                                <div className="clinicas" key={clinica.id}>
+                                <div className="clinicas">
                                     <div className="clinicasFoto">
                                         <img src={clinica.foto}alt={clinica.nombre}/>
                                     </div>
                                     <div className="informacionClinica">
                                         <p className="nombreClinica">{clinica.nombre}</p>
-                                        <p className="atributoClinicas">⭐{clinica.especialidad}</p>
-                                        <p className="atributoClinicas">📍{clinica.direccion}</p>
+                                        <p className="especialidadClinica">⭐{clinica.especialidad}</p>
+                                        <p className="direccionClinica">📍{clinica.direccion}</p>
                                     </div>
                                 </div>
                             </Link>
@@ -70,13 +77,6 @@ const Clinics = () => {
                 ) : (
                     null
                 )}
-                {/* Botones para cambiar de modo */}
-                <div className="crud">
-                    <button className="botonCRUD" onClick={() => cambiarModo('lectura')}>Modo Lectura</button>
-                    <button className="botonCRUD" onClick={() => cambiarModo('editar')}>Editar Clinica</button>
-                    <button className="botonCRUD" onClick={() => cambiarModo('insertar')}>Insertar Clinica</button>
-                    <button className="botonCRUD" onClick={() => cambiarModo('eliminar')}>Eliminar Clinica</button>
-                </div>
             </div>
         </div>
     );

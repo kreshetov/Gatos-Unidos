@@ -23,10 +23,13 @@ a {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: flex-start;
   gap: 20px;
-  padding-bottom: 10px;
+  width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  margin: 0 auto;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 /* Tarjeta individual */
@@ -35,7 +38,7 @@ a {
   max-width: 100%;
   border-radius: 10px;
   text-align: center;
-  margin: 0;
+  margin: 0 auto;
   box-shadow: inset 0 0 20px rgba(30, 64, 80, 0.2);
   border: 1px solid black;
   cursor: pointer;
@@ -55,7 +58,7 @@ a {
 .gatosFoto {
   width: 100%;
   max-width: 100%;
-  overflow: hidden; /* Prevenir que la imagen se salga */
+  overflow: hidden;
 }
 
 /* Imagen del gato */
@@ -144,6 +147,7 @@ a {
 /* Responsive para pantallas pequeñas */
 @media (max-width: 400px) {
   .gatos {
-    width: 90%; /* que se ajuste mejor a pantallas pequeñas */
+    width: 90%; 
+    margin: 0 auto;
   }
 }
