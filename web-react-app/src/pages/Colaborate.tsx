@@ -18,16 +18,6 @@ const Colaborate = () => {
                         <Link to="/Donar"><button className="boton">¡Quiero Contribuir!</button></Link>
                     </div>
                     <div className="colaboracion">
-                        <p className="encabezadoColabora">🐾 Vínculo directo con un gato</p>
-                        <p className="tipoColaboracion">
-                            (adopción, acogida, apadrinamiento)
-                        </p>
-                        <p className="texto">
-                            Cambia su vida y la tuya. Adopta, acoge por un tiempo o apadrina a un gato para ser parte activa de su historia.
-                        </p>
-                        <Link to="/Adoptar"><button className="boton">¡Quiero Involucrarme!</button></Link>
-                    </div>
-                    <div className="colaboracion">
                         <p className="encabezadoColabora">🚨 Reportar un gato en apuros</p>
                         <p className="tipoColaboracion">
                             (gato perdido, herido, abandonado)
@@ -35,7 +25,7 @@ const Colaborate = () => {
                         <p className="texto">
                             Si ves un gato que necesita ayuda, cuéntanos. Nuestro equipo intentará actuar lo antes posible para rescatarlo y darle la atención que necesita.
                         </p>
-                        <Link to="/Reportar"><button className="boton">¡Quiero reportar un caso!</button></Link>
+                        <a href="https://wa.me/34623200263" target="_blank" rel="noopener noreferrer"><button className="boton">¡Reportar al WhatsApp!</button></a>
                     </div>
                 </div>
             </div>

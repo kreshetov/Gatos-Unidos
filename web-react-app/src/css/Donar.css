@@ -1,18 +1,25 @@
 .contenedorDonaciones {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   font-size: 16px;
   color: #1e4050;
   text-align: center;
   gap: 20px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
 }
 
 .donacion {
   color: black;
   width: 350px;
+  max-width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  box-sizing: border-box;
 }
 
 .fraseDonacion {
@@ -43,7 +50,7 @@
 }
 
 .botonPaypal {
-  background-color: #ffc439; /* color amarillo PayPal */
+  background-color: #ffc439;
   border: none;
   color: #034286;
   padding: 12px 24px;
@@ -83,4 +90,23 @@
   color: #ffb347;
   box-shadow: 0 2px 0 #b38f00;
   transform: translateY(1px);
+}
+
+/* Media query para móviles */
+@media (max-width: 768px) {
+  .contenedorDonaciones {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .donacion {
+    width: 90%;
+    max-width: 100%;
+  }
+
+  .botonPaypal,
+  .botonClinicas {
+    width: 100%;
+    padding: 12px 0;
+  }
 }

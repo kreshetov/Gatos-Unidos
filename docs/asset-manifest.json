@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/gatos-unidos/static/css/main.34f28703.css",
-    "main.js": "/gatos-unidos/static/js/main.53cb9ea0.js",
+    "main.css": "/gatos-unidos/static/css/main.ebb29f3e.css",
+    "main.js": "/gatos-unidos/static/js/main.176ce97b.js",
     "static/js/453.2a82e7ac.chunk.js": "/gatos-unidos/static/js/453.2a82e7ac.chunk.js",
     "static/media/fondo-web.jpg": "/gatos-unidos/static/media/fondo-web.62bfa2d72168e1afe017.jpg",
     "index.html": "/gatos-unidos/index.html",
-    "main.34f28703.css.map": "/gatos-unidos/static/css/main.34f28703.css.map",
-    "main.53cb9ea0.js.map": "/gatos-unidos/static/js/main.53cb9ea0.js.map",
+    "main.ebb29f3e.css.map": "/gatos-unidos/static/css/main.ebb29f3e.css.map",
+    "main.176ce97b.js.map": "/gatos-unidos/static/js/main.176ce97b.js.map",
     "453.2a82e7ac.chunk.js.map": "/gatos-unidos/static/js/453.2a82e7ac.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.34f28703.css",
-    "static/js/main.53cb9ea0.js"
+    "static/css/main.ebb29f3e.css",
+    "static/js/main.176ce97b.js"
   ]
 }

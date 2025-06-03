@@ -1,56 +1,102 @@
-.tituloColabora {
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-  color: #1e4050;
-}
-
 .informacionColabora {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  font-size: 16px;
-  color: #1e4050;
-  text-align: center;
   gap: 20px;
+  padding: 10px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
 }
 
 .colaboracion {
-  color: black;
   width: 350px;
-  padding: 10px;
+  max-width: 100%;
+  padding: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
-}
-
-.info {
-  text-decoration: underline;
+  box-sizing: border-box;
+  text-align: center;
+  color: #1e4050;
+  background-color: #f9f9f9;
 }
 
 .encabezadoColabora {
-  font-size: 25px;
+  font-size: 24px;
   font-weight: bold;
   color: #1e4050;
-  text-align: center;
 }
 
 .tipoColaboracion {
   font-size: 18px;
   font-style: italic;
   color: #5893a4;
-  text-align: center;
-
-}
-
-.boton {
-  background-color: yellow;
-  padding: 10px;
-  border-radius: 15px;
-  font-size: 15px;
+  margin-bottom: 10px;
 }
 
 .texto {
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 16px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   color: #1e4050;
+  margin-bottom: 15px;
+}
+
+.boton {
+  background-color: #034286;
+  border: none;
+  color: #ffc439;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #b38f00;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.boton:hover {
+  background-color: #0154ae;
+  color: #ffb347;
+  box-shadow: 0 2px 0 #b38f00;
+  transform: translateY(1px);
+}
+
+.tituloColabora {
+  font-size: 28px;
+  font-weight: bold;
   text-align: center;
+  margin: 20px auto;
+  color: #1e4050;
+  max-width: 90%;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .informacionColabora {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .colaboracion {
+    width: 90%;
+  }
+
+  .boton {
+    font-size: 15px;
+    padding: 10px 0;
+  }
+
+  .encabezadoColabora {
+    font-size: 20px;
+  }
+
+  .tipoColaboracion,
+  .texto {
+    font-size: 15px;
+  }
+
+  .tituloColabora {
+    font-size: 22px;
+  }
 }

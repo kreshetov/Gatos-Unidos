@@ -10,20 +10,16 @@ import Clinica from './pages/Clinica';
 import Colaborate from './pages/Colaborate';
 import Footer from './pages/Footer'
 import Donar from './pages/Donar';
-import Adoptar from './pages/Adoptar';
-import Reportar from './pages/Reportar';
 // Importando estilos css
 import './css/AboutUs.css';
 import './css/Clinica.css';
 import './css/Clinics.css';
 import './css/Colaborate.css';  
-import './css/ContactUs.css';
 import './css/Footer.css';
 import './css/Gato.css';  
 import './css/Gatos.css';
 import './css/NavBar.css';
 import './css/style.css';
-import './css/Adoptar.css';
 import './css/Donar.css';
 import './css/EditarGato.css';
 import './css/EliminarGato.css';
@@ -47,8 +43,6 @@ function App() {
               <Route path="/AboutUs" element={<AboutUs />} />
               <Route path="/Colaborate" element={<Colaborate />} />
               <Route path="/Donar" element={<Donar />} />
-              <Route path="/Adoptar" element={<Adoptar />} />
-              <Route path="/Reportar" element={<Reportar />} />
             </Routes>
           <Footer />
       </Router>

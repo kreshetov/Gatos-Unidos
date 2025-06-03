@@ -11,8 +11,6 @@ const NavBar = () => {
                 <li className="colabora"> <Link to="Colaborate"> Colabora </Link>
                     <ul className="desplegable-contenido">
                         <li><Link to="Donar">Donar</Link></li>
-                        <li><Link to="Adoptar">Adoptar</Link></li>
-                        <li><Link to="Reportar">Reportar</Link></li>
                     </ul>
                 </li>
             </ul>

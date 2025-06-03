@@ -19,9 +19,9 @@ const Donar = () => {
                         <p className="fraseDonacion">🍽️ Donar alimentos y más 🐈</p>
                         <p className="tipoDonacion">(Alimentos, juguetes, y otros materiales)</p>
                         <p className="textoDonacion">
-                        Donar comida, arena, juguetes o cualquier otro recurso mejora su bienestar. Tu ayuda marca la diferencia. Entrega tu aporte directamente en nuestras clínicas colaboradoras.
+                        Donar comida, arena, juguetes o cualquier otro recurso mejora su bienestar. Tu ayuda marca la diferencia. Entrega tu aporte directamente en Gatos Unidos.
                             </p>
-                        <Link to="/Clinics"><button className="botonClinicas">Clinicas Colaboradoras</button></Link>
+                        <Link to="/AboutUs"><button className="botonClinicas">Nuestra Asociación</button></Link>
                     </div>
                 </div>
             </div>
