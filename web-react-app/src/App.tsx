@@ -10,6 +10,8 @@ import Clinica from './pages/Clinica';
 import Colaborate from './pages/Colaborate';
 import Footer from './pages/Footer'
 import Donar from './pages/Donar';
+import LoginAdmin from './pages/LoginAdmin';
+import Admin from './pages/Admin';
 // Importando estilos css
 import './css/AboutUs.css';
 import './css/Clinica.css';
@@ -27,6 +29,8 @@ import './css/InsertarGato.css';
 import './css/EditarClinica.css';
 import './css/EliminarClinica.css';
 import './css/InsertarClinica.css';
+import './css/Admin.css';
+import './css/LoginAdmin.css';
 
 function App() {
   return (
@@ -43,6 +47,7 @@ function App() {
               <Route path="/AboutUs" element={<AboutUs />} />
               <Route path="/Colaborate" element={<Colaborate />} />
               <Route path="/Donar" element={<Donar />} />
+              <Route path="/admin" element={<Admin />} />
             </Routes>
           <Footer />
       </Router>
